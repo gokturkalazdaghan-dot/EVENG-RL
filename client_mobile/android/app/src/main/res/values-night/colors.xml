@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
-  Karanlık tema açılış zemini — tokens.ts palette.dark.background ile aynı.
-  Açık tema artık VARSAYILAN olduğu için values/ tarafı açık; bu dosya
-  yalnızca sistem koyu istediğinde devreye giriyor.
--->
-<resources>
-    <color name="window_background">#0F1619</color>
-</resources>
