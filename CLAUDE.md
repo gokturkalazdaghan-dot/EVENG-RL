@@ -104,6 +104,7 @@ android/                         WebView APK
 
 ## Layout CSS contracts
 
+- `.app-center` uses `justify-content: safe center`, **never plain `center`**. Plain `center` overflows a too-tall child in *both* directions and the top part becomes unreachable — `scrollTop` cannot go negative. Measured: the Looks tab's 342 cards form a 42,564px stack and the category buttons sat at y = -20793, invisible and unclickable. Four tabs were under that rule; only studio/tools/oracle had been rescued with one-off exception classes. Pinned by `scripts/layout-contract.test.mjs`.
 - `#app` / `.phone` 9:16, fills the device, not floating in a tablet bezel
 - `.nav` `position: fixed; left:0; right:0; bottom:0; z-index: 9999;`
 - `.app-body` `padding-bottom` ≥ nav height; `.app-body.is-tools { justify-content: flex-start; overflow-y: auto; }`

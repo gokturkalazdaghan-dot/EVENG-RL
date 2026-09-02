@@ -423,3 +423,32 @@ test("browser-smoke file I/O only touches guarded paths", () => {
   const stats = [...src.matchAll(/statSync\(\s*([A-Za-z_$][\w$.]*)/g)].map((m) => m[1]);
   assert.deepEqual(stats, ["baselinePath"]);
 });
+
+/**
+ * GÖRÜNÜR ALANIN ÜSTÜNE KAÇMIŞ İÇERİK sayfa hatası kadar ciddidir.
+ *
+ * `justify-content: center` taşan çocuğu iki yöne birden taşırır; yukarı
+ * taşan kısma `scrollTop` negatif olamadığı için ULAŞILAMAZ. Bu depoda
+ * Efekt sekmesinin kategori düğmeleri y = -20793'te duruyordu: görünmüyor,
+ * tıklanamıyor, kaydırmayla gelmiyor. Mevcut `horizontalOverflow` kontrolü
+ * bunu göremiyordu — yatay değil, dikey ve negatif yöndeydi.
+ */
+test("offscreenAbove sayfa hatası gibi başarısızlık sayılır", () => {
+  const ok = { desktop: { status: 200, consoleErrors: [], pageErrors: [] } };
+  assert.equal(exitCodeFor(ok), 0);
+
+  const above = {
+    desktop: {
+      status: 200,
+      consoleErrors: [],
+      pageErrors: [],
+      offscreenAbove: { top: -20793, selector: "button.fx-cat" },
+    },
+  };
+  assert.equal(exitCodeFor(above), 2);
+});
+
+test("offscreenAbove null iken geçer", () => {
+  const v = { mobile: { status: 200, consoleErrors: [], pageErrors: [], offscreenAbove: null } };
+  assert.equal(exitCodeFor(v), 0);
+});

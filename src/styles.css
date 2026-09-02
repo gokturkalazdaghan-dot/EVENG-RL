@@ -2356,7 +2356,25 @@ html.grok-preview .app-body {
 .app-center {
   display: flex !important;
   flex-direction: column !important;
+  /*
+   * TAŞAN İÇERİK ORTALANMAZ — `safe center`.
+   *
+   * Düz `center`, çocuğu kapsayıcıdan uzunsa onu İKİ YÖNE birden taşırır
+   * ve üst kısmı ERİŞİLEMEZ hale getirir: `scrollTop` negatif olamaz.
+   * Ölçüldü — Efekt sekmesinde 342 kart 42 564 piksellik bir yığın
+   * oluşturuyor ve kategori düğmeleri y = -20793'e düşüyordu. Ekranda
+   * görünmüyor, tıklanamıyor, kaydırmayla da ulaşılamıyordu.
+   *
+   * `safe center`: sığıyorsa ortalar, sığmıyorsa `flex-start` gibi
+   * davranır. Anlamayan tarayıcı ikinci bildirimi yok sayar ve eski
+   * davranışta kalır — yani gerileme riski yok.
+   *
+   * Bu, is-tools / is-oracle / is-studio'ya tek tek istisna eklemenin
+   * yerini alıyor: sorun o üç ekranda değil, kuralın kendisindeydi ve
+   * eklenecek her yeni ekranda tekrar çıkardı.
+   */
   justify-content: center !important;
+  justify-content: safe center !important;
   flex: 1 1 auto !important;
   width: 100% !important;
   min-height: 0 !important;

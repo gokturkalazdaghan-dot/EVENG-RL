@@ -144,6 +144,35 @@ try {
       const el = document.documentElement;
       return el.scrollWidth > el.clientWidth + 1;
     });
+
+    /**
+     * GÖRÜNÜR ALANIN ÜSTÜNE KAÇMIŞ İÇERİK.
+     *
+     * `justify-content: center`, çocuğu kapsayıcıdan uzunsa onu İKİ YÖNE
+     * birden taşırır. Aşağı taşan kısma kaydırarak ulaşılır; YUKARI taşan
+     * kısma ULAŞILAMAZ, çünkü `scrollTop` negatif olamaz.
+     *
+     * Bu depoda tam olarak bu oldu: Efekt sekmesindeki 342 kart 42 564
+     * piksellik bir yığın oluşturuyor ve kategori düğmeleri y = -20793'e
+     * düşüyordu. Ekranda yok, tıklanamıyor, kaydırmayla da gelmiyor.
+     * `horizontalOverflow` bunu görmüyordu — yatay değil DİKEY ve
+     * negatif yöndeydi.
+     *
+     * Eşik -4px: kenar yumuşatma ve dönüşümler için küçük negatifler
+     * normaldir; ekran yüksekliği kadar yukarıda duran bir düğme değildir.
+     */
+    const offscreenAbove = await page.evaluate(() => {
+      const worst = { top: 0, selector: "" };
+      for (const el of document.querySelectorAll("button, a, input, [role='button']")) {
+        const r = el.getBoundingClientRect();
+        if (r.width === 0 && r.height === 0) continue;
+        if (r.top < worst.top) {
+          worst.top = Math.round(r.top);
+          worst.selector = `${el.tagName.toLowerCase()}.${String(el.className || "").split(" ")[0]}`;
+        }
+      }
+      return worst.top < -4 ? worst : null;
+    });
     await page.screenshot({ path: vp.screenshot, fullPage: false });
     await page.close();
 
@@ -157,6 +186,7 @@ try {
       bodyTextHash: normalizedBodyTextHash(bodyText),
       bodyTextPrefix: bodyTextPrefix(bodyText),
       horizontalOverflow,
+      offscreenAbove,
       consoleErrors: errors.consoleErrors,
       pageErrors: errors.pageErrors,
       screenshot: vp.screenshot,

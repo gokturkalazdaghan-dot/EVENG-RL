@@ -121,6 +121,10 @@ export function exitCodeFor(viewports) {
   const list = Object.values(viewports ?? {});
   if (list.length === 0) return 1;
   if (list.some((v) => (v.status ?? 0) >= 400 || (v.status ?? 0) === 0)) return 1;
+  // Görünür alanın ÜSTÜNE kaçmış tıklanabilir eleman, sayfa hatası kadar
+  // ciddidir: kullanıcı o düğmeye ne görerek ne kaydırarak ulaşabilir.
+  // Bkz. browser-smoke.mjs → offscreenAbove.
+  if (list.some((v) => v.offscreenAbove)) return 2;
   if (list.some((v) => (v.consoleErrors?.length ?? 0) > 0 || (v.pageErrors?.length ?? 0) > 0)) {
     return 2;
   }
