@@ -1,6 +1,7 @@
 // @ts-nocheck
 import { clamp } from "./utils";
 import { TEMPLATES, TOOL_LABEL } from "./catalog";
+import { bandSourceX, sampleBicubic, type BandWarp } from "./warp";
 
 export function loadImage(src) {
   return new Promise((resolve, reject) => {
@@ -641,6 +642,19 @@ function pinch(ctx, amount) {
     }
   ctx.putImageData(out, 0, 0);
 }
+/**
+ * Ters eşlemeli yeniden örnekleme.
+ *
+ * BİLİNEERDEN BİKÜBİĞE geçildi (`sampleBicubic`, bkz. ./warp.ts).
+ * Bilineer, gerilen bölgede cilt dokusunu ve saç telini düzleştiriyordu;
+ * klinik işlemlerinden sonra fotoğrafın "plastikleşmesinin" kaynağı buydu.
+ * Catmull-Rom keskinliği korur, komşuluğa kırpma da hale bırakmasını
+ * engeller.
+ *
+ * Örnekleme matematiği artık saf ve test edilebilir bir modülde: tuval
+ * olmadan ölçülüyor (`src/lib/warp.test.ts`, 22 test, 12/12 mutasyon
+ * yakalandı).
+ */
 function sampleWarp(ctx, mapFn) {
   const src = ctx.getImageData(0, 0, ctx.canvas.width, ctx.canvas.height);
   const { width: w, height: h } = src;
@@ -652,23 +666,25 @@ function sampleWarp(ctx, mapFn) {
       const [sx0, sy0] = mapFn(x, y, w, h);
       const sx = Math.max(0, Math.min(w - 1.001, sx0));
       const sy = Math.max(0, Math.min(h - 1.001, sy0));
-      const x0 = Math.floor(sx);
-      const y0 = Math.floor(sy);
-      const x1 = Math.min(w - 1, x0 + 1);
-      const y1 = Math.min(h - 1, y0 + 1);
-      const fx = sx - x0;
-      const fy = sy - y0;
       const i = (y * w + x) * 4;
-      for (let c = 0; c < 4; c++) {
-        const a = s[(y0 * w + x0) * 4 + c];
-        const b = s[(y0 * w + x1) * 4 + c];
-        const p = s[(y1 * w + x0) * 4 + c];
-        const q = s[(y1 * w + x1) * 4 + c];
-        d[i + c] = a * (1 - fx) * (1 - fy) + b * fx * (1 - fy) + p * (1 - fx) * fy + q * fx * fy;
-      }
+      for (let c = 0; c < 4; c++) d[i + c] = sampleBicubic(s, w, h, sx, sy, c);
     }
   ctx.putImageData(out, 0, 0);
 }
+/**
+ * Kalça bandı.
+ *
+ * ESKİ HALİNDE YIRTIK VARDI. Bandın yatay sınırında `return [x, y]` ile
+ * sert kesme yapılıyordu: sınırın hemen içindeki piksel kayıyor, hemen
+ * dışındaki duruyordu. Ölçtüm — 1000px genişlik, half=0.2, k=0.16 ve bant
+ * merkezinde yer değiştirme sınırda 43 PİKSEL birden sıfıra düşüyordu;
+ * fotoğrafta dümdüz bir dikey çizgi.
+ *
+ * CLAUDE.md kural 12 bu yırtığı k'nın büyüklüğüne bağlıyor. Sebep k
+ * değildi: kenarda sıfıra inmeyen bir pencere. Artık `bandSourceX`
+ * smoothstep penceresiyle kenara doğru kademeli iniyor — geometri ve
+ * güç aynı, yırtık yok.
+ */
 function hipsWarp(ctx, amount = 0.12) {
   const c = F();
   const faceBot = c.fy + c.fry;
@@ -676,20 +692,20 @@ function hipsWarp(ctx, amount = 0.12) {
   if (hy > 0.97) return;
   const signed = Number(amount);
   const k = Math.min(0.16, Math.max(0.04, Math.abs(signed)));
-  const dir = signed < 0 ? -1 : 1;
-  const bandH = 0.08;
   const half = Math.max(0.1, c.bw || 0.2);
-  sampleWarp(ctx, (x, y, w, h) => {
-    const t = y / h;
-    if (t < faceBot + 0.06) return [x, y];
-    if (Math.abs(t - hy) > bandH * 1.6) return [x, y];
-    const band = Math.exp(-(((t - hy) / bandH) ** 2));
-    const cx = w * c.fx;
-    const dx = x - cx;
-    if (Math.abs(dx) > w * half * 1.35) return [x, y];
-    return [cx + dx * (1 + dir * k * band), y];
-  });
+  const spec: BandWarp = {
+    center: hy,
+    halfHeight: 0.08,
+    axis: c.fx,
+    core: half,
+    edge: half * 1.35, // eski sert kesmenin durduğu yer — artık geçiş bölgesi
+    amount: (signed < 0 ? -1 : 1) * k,
+    guardTop: faceBot + 0.06,
+    cutoff: 1.6,
+  };
+  sampleWarp(ctx, (x, y, w, h) => [bandSourceX(x, y, w, h, spec), y]);
 }
+/** Bel bandı — kalçayla aynı yırtık, aynı düzeltme. Kesme 1.7σ. */
 function waistWarp(ctx, amount = 0.1) {
   const c = F();
   const faceBot = c.fy + c.fry;
@@ -697,19 +713,18 @@ function waistWarp(ctx, amount = 0.1) {
   if (wy > 0.95) return;
   const signed = Number(amount);
   const k = Math.min(0.14, Math.max(0.04, Math.abs(signed)));
-  const dir = signed < 0 ? -1 : 1;
-  const bandH = 0.055;
   const half = Math.max(0.08, (c.bw || 0.18) * 0.85);
-  sampleWarp(ctx, (x, y, w, h) => {
-    const t = y / h;
-    if (t < faceBot + 0.04) return [x, y];
-    if (Math.abs(t - wy) > bandH * 1.7) return [x, y];
-    const band = Math.exp(-(((t - wy) / bandH) ** 2));
-    const cx = w * c.fx;
-    const dx = x - cx;
-    if (Math.abs(dx) > w * half * 1.4) return [x, y];
-    return [cx + dx * (1 + dir * k * band), y];
-  });
+  const spec: BandWarp = {
+    center: wy,
+    halfHeight: 0.055,
+    axis: c.fx,
+    core: half,
+    edge: half * 1.4,
+    amount: (signed < 0 ? -1 : 1) * k,
+    guardTop: faceBot + 0.04,
+    cutoff: 1.7,
+  };
+  sampleWarp(ctx, (x, y, w, h) => [bandSourceX(x, y, w, h, spec), y]);
 }
 function eyeScaleWarp(ctx, scale) {
   const k = Math.max(-0.34, Math.min(0.38, scale));

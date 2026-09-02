@@ -54,7 +54,8 @@ Removed on purpose (do not restore unless asked): Story, weekly rank/league, Fee
 9. **Theme:** dim beige/white background, candy pink buttons, neon glow only on press/active. Not dark, not navy space. App language follows device; UI copy English-simple with TR catalog names OK.
 10. **Horizontal rails** for filters/templates (swipe left/right) so the photo stays on screen. Labels + color ribbons under thumbs must stay visible.
 11. **Agent dock** (right edge) opens a chooser under the app — does not auto-apply/save. Auto-hides to an edge chevron after ~20s idle.
-12. **Warps stay subtle.** `hipsWarp` / `waistWarp` in `fx.ts` use bilinear `sampleWarp` with small k (≈0.05–0.16). Large displacement tears holes — never raise k blindly.
+12. **Warps stay subtle.** `hipsWarp` / `waistWarp` build a `BandWarp` and go through `bandSourceX` in `src/lib/warp.ts`; `sampleWarp` resamples with clamped Catmull-Rom (`sampleBicubic`). Keep k ≈ 0.05–0.16.
+    *Correction to the old rule:* the tearing this rule blamed on large k was **not** caused by k. The band had a hard lateral cutoff (`if (|dx| > w*half*1.35) return [x, y]`), so displacement dropped from 43 px to 0 between two neighbouring pixels. Measured, then fixed with a smoothstep window that reaches exactly zero at the edge: worst neighbour-to-neighbour jump went 25.92 px → 0.74 px at identical k. Do not reintroduce a hard cutoff; widen `edge` instead. Covered by `src/lib/warp.test.ts` (22 tests, 12/12 mutations caught).
 
 ## Clinic (Araçlar) — treat as aesthetic desk
 
@@ -110,7 +111,8 @@ android/                         WebView APK
 
 ## What is still weak (fix these next, in order)
 
-1. Clinic morphs (hips/waist/eyes) are local warps — quality is not Remini/Facetune. Improve sampling, never identity-swap via AI.
+1. ~~Clinic morphs sampling~~ — **done**: bilinear → clamped Catmull-Rom everywhere (`sampleWarp`), and the lateral hard cutoff that was tearing hips/waist is gone (see rule 12).
+   `eyeScaleWarp` / `almondWarp` were **measured, not assumed**: their radial `(1 - r²)²` falloff already reaches zero at the ellipse edge, so they never tore — worst neighbour jump 0.38 px at max strength. They keep their inline path on purpose; there is nothing to fix there.
 2. Hair style/cut is glaze/color, not a real restyle.
 3. Generate/video depends on API keys; always keep on-device fallback.
 4. Play Billing is UI-only (`play-store.ts`) — wire real Play Billing before store submit.
