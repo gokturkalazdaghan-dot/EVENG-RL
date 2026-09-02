@@ -19,7 +19,7 @@ import { clearFalHold, loadFalHold, saveFalCups, saveFalDream, saveFalPalm } fro
 import { readOracle, type OracleKind, type OracleLetter } from "@/lib/oracle";
 import { readOracleOnDevice } from "@/lib/oracle-device";
 import { withTimeout } from "@/lib/timed";
-import { ORACLE_AGENTS, WAIT_BOOKS } from "@/lib/oracle-canon";
+import { ORACLE_AGENTS } from "@/lib/oracle-canon";
 import { fetchSpark } from "@/lib/public-feed";
 import { isPro, useApp } from "@/lib/store";
 import { cn, requestPaywall, uid } from "@/lib/utils";
@@ -69,6 +69,8 @@ export function OracleScreen() {
   const locale = useLocale();
   const flash = useApp((s) => s.flash);
   const pro = isPro(useApp((s) => s.proUntil));
+  const birthDate = useApp((s) => s.birthDate);
+  const setBirthDate = useApp((s) => s.setBirthDate);
   const fileRef = useRef<HTMLInputElement>(null);
   const slotRef = useRef(0);
   const held = loadFalHold();
@@ -234,7 +236,7 @@ export function OracleScreen() {
        */
       let res = await withTimeout<{ ok: true; letter: OracleLetter } | { ok: false; error: string }>(
         readOracle({
-          data: { kind, locale, images, dream: kind === "dream" ? dream : undefined },
+          data: { kind, locale, images, dream: kind === "dream" ? dream : undefined, birthDate },
         }),
         60_000,
       ).catch(() => ({ ok: false as const, error: "" }));
@@ -244,6 +246,7 @@ export function OracleScreen() {
           kind,
           images,
           dream: kind === "dream" ? dream : undefined,
+          birthDate,
         });
         // Cihaz da okuyamadıysa ONUN sebebi gösteriliyor: "üç açı gerekli",
         // "avuçta çizgi seçilmedi" gibi mesajlar kullanıcıya ne yapacağını
@@ -325,21 +328,38 @@ export function OracleScreen() {
               <span className="fal-meter" aria-hidden>
                 <i style={{ width: `${waitPct}%` }} />
               </span>
-              <span className="oracle-book-now">
-                {WAIT_BOOKS[job?.kind || plate][Math.floor(now / 1800) % WAIT_BOOKS[job?.kind || plate].length]}
-              </span>
+              {/* Bekleme sırasında da kitap adı dönmüyor (bkz. yukarıdaki not). */}
             </div>
           ) : null}
         </section>
 
         {waiting ? (
           <div className="oracle-dock is-wait">
-            <p className="oracle-dock-wait">
-              {WAIT_BOOKS[job?.kind || plate][Math.floor(now / 1800) % WAIT_BOOKS[job?.kind || plate].length]}
-            </p>
+            <p className="oracle-dock-wait">{t("fal_wait")}</p>
           </div>
         ) : (
         <div className="oracle-dock">
+          {/*
+            DOĞUM TARİHİ — okumayı kişiye bağlayan tek girdi.
+            KİMLİK BİLGİSİ İSTENMİYOR: ad, e-posta, telefon yok. Tarih
+            cihazda kalır, hiçbir yere gönderilmez. Boş bırakılabilir —
+            o zaman okuma yalnızca külliyattan gelir.
+          */}
+          {!revealed ? (
+            <label className="oracle-birth">
+              <span className="oracle-birth-label">{t("fal_birth")}</span>
+              <input
+                type="date"
+                className="oracle-birth-input"
+                value={birthDate}
+                max={new Date().toISOString().slice(0, 10)}
+                min="1900-01-01"
+                disabled={waiting}
+                onChange={(e) => setBirthDate(e.target.value)}
+              />
+              <span className="oracle-birth-hint">{t("fal_birth_hint")}</span>
+            </label>
+          ) : null}
           {revealed ? (
             <CrystalButton className="oracle-mid-send" onClick={fresh}>
               {t("fal_new")}
@@ -407,6 +427,17 @@ export function OracleScreen() {
         <article className="oracle-letter">
           <p className="oracle-omen">{letter.omen}</p>
           <h2>{letter.title}</h2>
+          {/*
+            HUY BÖLÜMÜ — kişiye oturan kısım.
+            Doğum tarihi girilmemişse `character` boş gelir ve bu bölüm
+            hiç çıkmaz. Uydurma bir huy tarifi yazmıyoruz.
+          */}
+          {letter.character ? (
+            <section className="oracle-fade oracle-character">
+              <h3>{t("fal_character")}</h3>
+              <p>{letter.character}</p>
+            </section>
+          ) : null}
           {LETTER_KEYS.map((row) =>
             letter[row.k] ? (
               <section key={row.k} className="oracle-fade">
@@ -415,9 +446,13 @@ export function OracleScreen() {
               </section>
             ) : null,
           )}
-          <p className="oracle-src">
-            {t("fal_canon")}: {letter.sources || WAIT_BOOKS[job?.kind || plate].slice(0, 3).join(" · ")}
-          </p>
+          {/*
+            KAYNAK LİSTESİ GÖSTERİLMİYOR — ürün kararı.
+            Okuma gerçekten kadim külliyata dayanıyor ve hangi kitaplara
+            dayandığı `letter.sources` içinde KAYITTA duruyor; ama ekranda
+            kitap adı dizmek falcının ağzından çıkacak bir şey değil ve
+            okumanın sadeliğini bozuyor.
+          */}
           {job?.spark?.tarot ? (
             <p className="oracle-src">
               Kart · {job.spark.tarot}

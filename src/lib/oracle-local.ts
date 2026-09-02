@@ -35,6 +35,7 @@ import {
   WAIT_BOOKS,
 } from "./oracle-canon.ts";
 import type { OracleKind, OracleLetter } from "./oracle.ts";
+import type { Temperament } from "./natal.ts";
 
 // ─── ÖLÇÜM ────────────────────────────────────────────────────────────
 
@@ -330,9 +331,79 @@ function books(kind: OracleKind, count: number): string {
   return list.slice(0, Math.max(3, Math.min(count, list.length))).join(" · ");
 }
 
-function letter(kind: OracleKind, parts: Omit<OracleLetter, "agent" | "sources" | "canon" | "body" | "counsel">): OracleLetter {
+type LetterCore = Omit<
+  OracleLetter,
+  "agent" | "sources" | "canon" | "body" | "counsel" | "character"
+>;
+
+/**
+ * KISALTMA — okuma sade ve vurgulu olmalı.
+ *
+ * Külliyat girdileri akademik yazılmış: "Kalp çizgisi (Venüs→Merkür)".
+ * Kullanıcı falcıdan cümle bekler, dipnot değil. Parantez içi teknik
+ * ekler ve fazla uzun kuyruklar burada düşüyor.
+ */
+function plain(text: string, max = 130): string {
+  let t = String(text ?? "")
+    // Parantez içi teknik açıklama: "(Venüs→Merkür)", "(klasik tabir)"
+    .replace(/\s*\([^)]*\)/g, "")
+    // Kaynak adı sızmışsa at: "İbn Sirin: su kalbin hali" → "su kalbin hali".
+    // YALNIZCA BİLİNEN kitap/yazar adları. İlk halinde iki nokta öncesi her
+    // şeyi siliyordum ve ÖLÇTÜM: "Kulpta yol / patika: seçim veya yolculuk"
+    // → "seçim veya yolculuk" oluyordu, yani okumanın asıl maddesi olan
+    // işaret adı uçuyordu.
+    .replace(
+      /^(?:İbn Sirin|Ibn Sirin|Artemidorus|Cheiro|Agrippa|Zhou Gong|Macrobius|Achmet|Samudrika|Tabirname)\s*:\s*/i,
+      "",
+    )
+    .replace(/\s+/g, " ")
+    .trim();
+  if (t.length <= max) return t;
+  // Cümle sınırında kes — yarım kelimeyle bitmesin.
+  const cut = t.slice(0, max);
+  const stop = Math.max(cut.lastIndexOf(". "), cut.lastIndexOf("? "), cut.lastIndexOf("! "));
+  t = stop > max * 0.5 ? cut.slice(0, stop + 1) : cut.slice(0, cut.lastIndexOf(" "));
+  return t.trim().replace(/[,;:—-]$/, "");
+}
+
+/** Cümleyi noktalar; zaten noktalıysa dokunmaz. */
+function endStop(text: string): string {
+  const t = String(text ?? "").trim();
+  if (t.length === 0) return t;
+  return /[.!?…]$/.test(t) ? t : `${t}.`;
+}
+
+/**
+ * Mektup — kadim külliyat ağırlıklı, kişinin huyu az payla harmanlı.
+ *
+ * AĞIRLIK: beş alanın dördü (işaret, görülen, gönül, yol) doğrudan
+ * külliyattan ve fotoğraftan gelir. Huy yalnızca `character` alanını ve
+ * `near` satırının kapanışını besler. Külliyat baskın, huy tamamlayıcı.
+ *
+ * `sources` doldurulur ama EKRANDA BASILMAZ: okumanın hangi külliyata
+ * dayandığı kayıtta kalsın diye.
+ */
+function letter(
+  kind: OracleKind,
+  parts: LetterCore,
+  temper?: Temperament | null,
+): OracleLetter {
+  const short: LetterCore = {
+    title: plain(parts.title, 46),
+    omen: plain(parts.omen, 120),
+    seen: plain(parts.seen, 150),
+    love: plain(parts.love, 120),
+    path: plain(parts.path, 120),
+    near: plain(parts.near, 120),
+  };
   return {
-    ...parts,
+    ...short,
+    // Huy varsa okumayı kişiye bağlayan kapanış; yoksa külliyat satırı
+    // olduğu gibi kalır.
+    // İki cümle arasına nokta: birleştirme "…açılmış kapı Zorlanınca…"
+    // gibi tek nefeslik bir yığın üretiyordu.
+    near: temper ? `${endStop(short.near)} ${temper.strain}` : short.near,
+    character: temper ? `${temper.core} ${temper.heart}` : undefined,
     body: "",
     counsel: "",
     canon: "",
@@ -348,7 +419,10 @@ function letter(kind: OracleKind, parts: Omit<OracleLetter, "agent" | "sources" 
  * karşı ağız = dış dünya. Her kareden ölçülen en belirgin işaret o
  * bölgenin okumasına dönüşüyor.
  */
-export function coffeeReading(plates: readonly PlateFeatures[]): OracleLetter {
+export function coffeeReading(
+  plates: readonly PlateFeatures[],
+  temper?: Temperament | null,
+): OracleLetter {
   const three = [plates[0] ?? EMPTY_PLATE, plates[1] ?? EMPTY_PLATE, plates[2] ?? EMPTY_PLATE];
   const marks = three.map(matchCoffeeSign);
 
@@ -368,7 +442,7 @@ export function coffeeReading(plates: readonly PlateFeatures[]): OracleLetter {
     love: `Kulpta ${home.sign}: ${pickClause(home.reading, ["kulp", "dip"])}`,
     path: `Duvarda ${days.sign}: ${pickClause(days.reading, ["duvar", "büyüme", "zaman"])}`,
     near: `Karşı ağızda ${world.sign}: ${pickClause(world.reading, ["karşı", "yabancı", "dış"])}`,
-  });
+  }, temper);
 }
 
 // ─── EL FALI ──────────────────────────────────────────────────────────
@@ -441,7 +515,7 @@ export function analyzePalm(data: ArrayLike<number>, w: number, h: number): Palm
   };
 }
 
-export function palmReading(f: PalmFeatures): OracleLetter {
+export function palmReading(f: PalmFeatures, temper?: Temperament | null): OracleLetter {
   const heart = palmSign("Kalp çizgisi")!;
   const head = palmSign("Baş çizgisi")!;
   const life = palmSign("Hayat çizgisi")!;
@@ -476,7 +550,7 @@ export function palmReading(f: PalmFeatures): OracleLetter {
       life.reading,
       chained ? ["kopuk", "ada"] : strong(f.life) ? ["geniş yay"] : ["sıkı", "ihtiyat"],
     )}`,
-  });
+  }, temper);
 }
 
 // ─── TÜRKÇE KÖK EŞLEME ────────────────────────────────────────────────
@@ -600,7 +674,7 @@ export function matchDreamSigns(text: string) {
  * anlatması söyleniyor. Boş bir metne "büyük bir değişim yaklaşıyor" demek,
  * tam da bu dosyanın kaçındığı şey.
  */
-export function dreamReading(text: string): OracleLetter | null {
+export function dreamReading(text: string, temper?: Temperament | null): OracleLetter | null {
   const matches = matchDreamSigns(text);
   if (matches.length === 0) return null;
 
@@ -656,6 +730,6 @@ export function dreamReading(text: string): OracleLetter | null {
     seen: `Rüyanda tuttuğum imgeler: ${imagery.join(", ")}.`,
     love: top[1] ?? "",
     path: top[2] ?? "",
-    near: `Tabir ${matches.length} imgeye dayanıyor; en güçlüsü "${imagery[0] ?? ""}".`,
-  });
+    near: `Rüyanın merkezinde ${imagery[0] ?? "bu imge"} duruyor.`,
+  }, temper);
 }

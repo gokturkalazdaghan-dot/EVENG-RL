@@ -19,6 +19,7 @@ import {
   palmReading,
 } from "./oracle-local.ts";
 import type { OracleKind, OracleLetter } from "./oracle.ts";
+import { temperamentFromDate } from "./natal.ts";
 
 /**
  * Analiz çözünürlüğü.
@@ -64,6 +65,14 @@ export type DeviceReadInput = {
   readonly kind: OracleKind;
   readonly images?: readonly string[];
   readonly dream?: string;
+  /**
+   * Doğum tarihi (`YYYY-MM-DD`), isteğe bağlı.
+   *
+   * Okumayı kişiye bağlayan huy bundan türetiliyor (bkz. natal.ts).
+   * Girilmemişse okuma yalnızca külliyattan gelir — huy bölümü hiç
+   * görünmez. Uydurma bir huy tarifi yazmıyoruz.
+   */
+  readonly birthDate?: string;
 };
 
 export type DeviceReadResult =
@@ -79,13 +88,14 @@ export type DeviceReadResult =
  */
 export async function readOracleOnDevice(input: DeviceReadInput): Promise<DeviceReadResult> {
   const kind = input.kind;
+  const temper = input.birthDate ? temperamentFromDate(input.birthDate) : null;
 
   if (kind === "dream") {
     const text = String(input.dream ?? "").trim();
     if (text.length < 12) {
       return { ok: false, error: "Rüyayı birkaç cümleyle anlat." };
     }
-    const letter = dreamReading(text);
+    const letter = dreamReading(text, temper);
     if (!letter) {
       // UYDURMA YOK: tanınan imge yoksa okuma üretilmiyor. Boş bir metne
       // "büyük bir değişim yaklaşıyor" demek, falı süse çevirir.
@@ -107,7 +117,7 @@ export async function readOracleOnDevice(input: DeviceReadInput): Promise<Device
     if (f.density < 0.02) {
       return { ok: false, error: "Avuçta çizgi seçilmedi. Işığı artırıp eli düz tut." };
     }
-    return { ok: true, letter: palmReading(f) };
+    return { ok: true, letter: palmReading(f, temper) };
   }
 
   if (sources.length < 3) {
@@ -122,5 +132,5 @@ export async function readOracleOnDevice(input: DeviceReadInput): Promise<Device
   if (plates.every((p) => p.coverage < 0.01)) {
     return { ok: false, error: "Fincanda telve görünmüyor. Işığı artırıp içini çek." };
   }
-  return { ok: true, letter: coffeeReading(plates) };
+  return { ok: true, letter: coffeeReading(plates, temper) };
 }

@@ -125,6 +125,15 @@ type State = {
   points: number;
   weekEnd: number;
   proUntil: number;
+  /**
+   * Doğum tarihi (`YYYY-MM-DD`), isteğe bağlı.
+   *
+   * Fal okumasını kişiye bağlamak için kullanılıyor. KİMLİK BİLGİSİ
+   * DEĞİL: cihazda kalır, hiçbir yere gönderilmez, adı/soyadı gibi bir
+   * alan istenmez. Boş bırakılabilir — o zaman okuma yalnızca külliyattan
+   * gelir.
+   */
+  birthDate: string;
   safeMode: boolean;
   crashReports: boolean;
   adultContent: boolean;
@@ -179,6 +188,7 @@ function snapshot(s) {
     points: s.points,
     weekEnd: s.weekEnd,
     proUntil: s.proUntil,
+    birthDate: s.birthDate,
     safeMode: s.safeMode,
     crashReports: s.crashReports,
     adultContent: s.adultContent,
@@ -314,6 +324,7 @@ export const useApp = create<State>((set, get) => ({
   points: 1840,
   weekEnd: initialWeekEnd,
   proUntil: 0,
+  birthDate: "",
   safeMode: true,
   crashReports: false,
   adultContent: false,
@@ -439,6 +450,7 @@ export const useApp = create<State>((set, get) => ({
               ? p.weekEnd
               : Date.now() + 1116e5,
           proUntil: p.proUntil ?? 0,
+          birthDate: typeof p.birthDate === "string" ? p.birthDate : "",
           safeMode: p.safeMode ?? true,
           crashReports: p.crashReports ?? false,
           adultContent: p.adultContent ?? false,
@@ -1664,6 +1676,10 @@ export const useApp = create<State>((set, get) => ({
       set({ proUntil: ent.untilMs });
       get().persist();
     }
+  },
+  setBirthDate: (iso) => {
+    set({ birthDate: typeof iso === "string" ? iso.slice(0, 10) : "" });
+    get().persist();
   },
   setCrystalId: (crystalId) => {
     set({ crystalId: crystalId === "boy" ? "girl" : crystalId });

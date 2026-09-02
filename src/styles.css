@@ -3209,3 +3209,46 @@ html.is-kb .app-nav {
   background: #ff4fa3;
   box-shadow: 0 4px 0 #d63a86, 0 0 22px rgb(255 110 180 / 0.55);
 }
+
+/* ─── Kahin: doğum tarihi ve huy bölümü ──────────────────────────────
+   Doğum tarihi okumayı kişiye bağlayan tek girdi. Kimlik bilgisi
+   istenmiyor; alan isteğe bağlı ve cihazda kalıyor. */
+.oracle-birth {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  width: 100%;
+  padding: 8px 12px 4px;
+}
+.oracle-birth-label {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--muted, #8a5a72);
+}
+.oracle-birth-input {
+  appearance: none;
+  width: 100%;
+  /* 44px: dokunma hedefi alt sınırı (WCAG 2.2 · 2.5.8). */
+  min-height: 44px;
+  padding: 0 12px;
+  border: 1px solid color-mix(in srgb, var(--pink, #ff4fa3) 26%, transparent);
+  border-radius: 14px;
+  background: rgb(255 255 255 / 0.7);
+  color: var(--deep, #4a2033);
+  font: inherit;
+  font-size: 0.95rem;
+}
+.oracle-birth-input:focus-visible {
+  outline: 2px solid var(--pink, #ff4fa3);
+  outline-offset: 2px;
+}
+.oracle-birth-hint {
+  font-size: 0.68rem;
+  line-height: 1.35;
+  color: color-mix(in srgb, var(--muted, #8a5a72) 82%, transparent);
+}
+.oracle-character p {
+  font-style: italic;
+}

@@ -1,6 +1,7 @@
 import { createServerFn } from "@tanstack/react-start";
 import { agentCanon, ORACLE_AGENTS } from "./oracle-canon";
 import { fetchTimed } from "./timed";
+import { temperamentFromDate } from "./natal";
 
 export type OracleKind = "coffee" | "palm" | "dream";
 
@@ -14,8 +15,23 @@ export type OracleLetter = {
   near: string;
   counsel: string;
   canon: string;
+  /**
+   * Kullanılan kitaplar.
+   *
+   * KULLANICIYA GÖSTERİLMEZ — ürün kararı. Alan duruyor çünkü okumanın
+   * gerçekten hangi külliyata dayandığını kayıtta tutmak, ileride bir
+   * yorumun nereden geldiğini sormak gerektiğinde tek kanıt. Ekranda
+   * basılmaz (bkz. oracle-screen.tsx).
+   */
   sources: string;
   agent: string;
+  /**
+   * Kişinin huyu — okumanın kişiye oturan kısmı.
+   *
+   * Kaynağı kullanıcıya SÖYLENMEZ (bkz. natal.ts). Boşsa doğum tarihi
+   * girilmemiş demektir ve ekranda o bölüm hiç çıkmaz.
+   */
+  character?: string;
 };
 
 function clean(raw: unknown, max = 900) {
@@ -65,11 +81,12 @@ function parseLetter(raw: unknown, agent: string): OracleLetter | null {
     canon: asText(o.canon),
     sources: asText(o.sources),
     agent: asText(o.agent) || agent,
+    character: asText(o.character) || undefined,
   };
 }
 
 export const readOracle = createServerFn({ method: "POST" })
-  .validator((input: { kind: OracleKind; locale?: string; image?: string; images?: string[]; dream?: string }) => input)
+  .validator((input: { kind: OracleKind; locale?: string; image?: string; images?: string[]; dream?: string; birthDate?: string }) => input)
   .handler(async ({ data }): Promise<{ ok: true; letter: OracleLetter } | { ok: false; error: string }> => {
     const apiKey = process.env.XAI_API_KEY;
     if (!apiKey) return { ok: false, error: "Reading is closed right now." };
@@ -87,17 +104,44 @@ export const readOracle = createServerFn({ method: "POST" })
     if (kind === "palm" && plates.length < 1) return { ok: false, error: "A clear palm photo is required." };
 
     const agent = ORACLE_AGENTS[kind];
+
+    /**
+     * Kişinin huyu — kaynağı MODELE de söylenmez biçimde veriliyor.
+     *
+     * Modele yalnızca huy tarifi gidiyor; hangi sistemden geldiği değil.
+     * Böylece model de çıktısında o alanın adını anamaz. Tarih yoksa
+     * bölüm hiç eklenmiyor ve okuma sadece külliyattan gelir.
+     */
+    const temper = temperamentFromDate(clean(data.birthDate, 10));
+    const temperBlock = temper
+      ? [
+          "Bu kişinin huyu (KAYNAĞINI ASLA YAZMA, sistem adı anma):",
+          `- ${temper.core}`,
+          `- ${temper.heart}`,
+          `- ${temper.choice}`,
+          `- ${temper.strain}`,
+          "Bu huyu okumanın KÜÇÜK bir payına karıştır (yaklaşık üçte bir).",
+          "Ağırlık kadim külliyatta ve fotoğrafta/rüyada görülen işarette olsun.",
+          "`character` alanına bu huyu sade, ikinci tekil şahısla yaz.",
+        ].join("\n")
+      : "";
+
     const schema = [
-      "Return JSON only with keys: title, omen, seen, love, path, near, sources, agent.",
+      "Return JSON only with keys: title, omen, seen, love, path, near, character, sources, agent.",
       `agent must be ${agent.name}.`,
-      "SIMPLE. No essay. No stacked scholarly citations in the paragraphs.",
+      "VERY SHORT AND PLAIN. Each field one or two short sentences, everyday words.",
+      "No essay, no scholarly citations, no jargon, no parenthetical technical notes.",
+      "The reader is not a scholar; write the way a fortune teller speaks across a table.",
       "Speak as a kahin to ONE woman sitting with you. Second person. Warm, specific, never generic horoscope.",
       "omen: ONE hook sentence — the most interesting, stop-scrolling claim.",
       "seen: one or two short sentences naming the image/mark.",
       "love, path, near: each 1–2 short sentences. Lead with what the reader cares about (love, news, a choice).",
       "Do NOT mention book titles inside omen/seen/love/path/near.",
-      "sources: array of 3–5 book names you actually used. This is the ONLY place for sources.",
+      "sources: array of 3–5 book names you actually used. Recorded, NEVER shown to the reader — so never repeat them anywhere else.",
+      "character: 1–2 short sentences on who this person is. Omit the field if no temperament was given.",
+      "Never name any star sign, zodiac, horoscope or astrological term anywhere in the output.",
       "No body, counsel, or canon fields.",
+      temperBlock,
       "No death date, no lottery, no medical diagnosis.",
       `Write every string value in ${langName(locale)}. Keep source book titles in their known names.`,
     ].join(" ");
