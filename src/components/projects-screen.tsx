@@ -1,4 +1,5 @@
 import { BearPair } from "@/components/mascots";
+import { t } from "@/lib/i18n";
 import { CrystalButton } from "@/components/crystal-button";
 import { IMAGE_ACCEPT, ingestImageFile, takeFile } from "@/lib/guard";
 import { shareKodZip } from "@/lib/share-zip";
@@ -44,20 +45,31 @@ export function ProjectsScreen() {
         <BearPair size={78} />
         <p className="mascot-kicker">EVENGIRL</p>
       </button>
+      {/*
+        HİYERARŞİ: kullanıcının geldiği iş fotoğraf eklemek.
+
+        Eskiden ana ekranın EN BÜYÜK, en gürültülü öğesi "ZIP İNDİR"di —
+        yani kaynağı paylaşan bir geliştirici aracı. Üç düğme de neredeyse
+        aynı ağırlıktaydı ve hiçbiri diğerinden önemli görünmüyordu.
+
+        Şimdi: fotoğraf birincil (dolu, büyük), boş tuval ikincil (çerçeve),
+        zip sessiz bir metin bağlantısı.
+      */}
       <div className="home-actions">
-        <CrystalButton size="md" tone="ghost" pill onClick={() => fileRef.current?.click()}>
-          Fotoğraf
+        <CrystalButton size="lg" tone="green" pill onClick={() => fileRef.current?.click()}>
+          Fotoğraf ekle
         </CrystalButton>
-        <CrystalButton size="md" tone="orange" pill onClick={() => createBlank()}>
+        <CrystalButton size="md" tone="ghost" pill onClick={() => createBlank()}>
           Boş tuval
         </CrystalButton>
       </div>
-      <button type="button" className="zip-dl" {...tapZip}>
-        {busy ? "Hazırlanıyor…" : "ZIP İNDİR"}
+      <button type="button" className="zip-dl is-quiet" {...tapZip}>
+        {busy ? "Hazırlanıyor…" : "Kaynağı indir"}
       </button>
       <input
         ref={fileRef}
         type="file"
+        aria-label={t("photo_pick")}
         accept={IMAGE_ACCEPT}
         className="sr-only"
         onChange={(e) => onFile(takeFile(e.currentTarget))}

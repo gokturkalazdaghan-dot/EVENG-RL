@@ -262,6 +262,7 @@ export function GenerateScreen() {
       <input
         ref={fileRef}
         type="file"
+        aria-label={t("photo_pick")}
         accept={IMAGE_ACCEPT}
         multiple
         className="sr-only"

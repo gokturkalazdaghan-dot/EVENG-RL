@@ -1,4 +1,5 @@
 import { CrystalButton } from "@/components/crystal-button";
+import { t } from "@/lib/i18n";
 import { ATELIERS, TEMPLATES } from "@/lib/catalog";
 import { IMAGE_ACCEPT, ingestImageFile, takeFile } from "@/lib/guard";
 import { useApp } from "@/lib/store";
@@ -82,7 +83,8 @@ export function AtelierHub() {
         NURA güzellik · CEHRA çehre look · RELYN netlik · REIRA yeniden çekim · PACCA klip ve şablon.
         Kimlik, yaş veya cinsiyet değişmez.
       </p>
-      <input ref={fileRef} type="file" accept={IMAGE_ACCEPT} className="sr-only" onChange={(e) => void onFile(takeFile(e.currentTarget))} />
+      <input ref={fileRef} type="file"
+        aria-label={t("photo_pick")} accept={IMAGE_ACCEPT} className="sr-only" onChange={(e) => void onFile(takeFile(e.currentTarget))} />
     </div>
   );
 }

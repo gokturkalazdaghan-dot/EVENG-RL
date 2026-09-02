@@ -2466,14 +2466,14 @@ html.is-kb .phone-shell {
   border: 0; min-height: 1.7rem; padding: 0.22rem 0.7rem; border-radius: 999px;
   font-size: 0.72rem; font-weight: 750; color: #c4286a; background: rgb(255 255 255 / 0.9);
 }
-.oracle-pane-toggle button.on { color: #fff; background: #ff4fa3; }
+.oracle-pane-toggle button.on { color: #fff; background: var(--pink-ink); }
 .oracle-shot { position: absolute; inset: 2.4rem 8% 18%; z-index: 2; width: auto; margin: auto; max-width: 70%; max-height: 42%; object-fit: contain; border-radius: 0.8rem; }
 .oracle-timer { position: absolute; left: 0.6rem; right: 0.6rem; bottom: 0.6rem; z-index: 4; text-align: center; color: #c4286a; }
 .oracle-timer strong { display: block; font-size: 1.4rem; }
 .oracle-dock { display: flex; justify-content: center; gap: 0.4rem; flex-shrink: 0; padding: 0.45rem; }
 .oracle-shot-btn, .oracle-mid-send {
   display: inline-flex; align-items: center; gap: 0.3rem; border: 0; min-height: 2.15rem;
-  padding: 0.35rem 0.9rem; border-radius: 999px; font-weight: 750; color: #fff; background: #ff4fa3;
+  padding: 0.35rem 0.9rem; border-radius: 999px; font-weight: 750; color: #fff; background: var(--pink-ink);
   box-shadow: 0 3px 0 #d63a86, 0 0 16px rgb(255 110 180 / 0.35);
 }
 .oracle-shot-btn em { font-style: normal; opacity: 0.85; font-size: 0.72rem; }
@@ -2485,7 +2485,7 @@ html.is-kb .phone-shell {
   padding: 0.55rem 0.8rem; background: #fff1f6; color: #4a2033; font-size: 0.86rem;
 }
 .oracle-chat-send {
-  width: 2.4rem; height: 2.4rem; border: 0; border-radius: 999px; color: #fff; background: #ff4fa3;
+  width: 2.4rem; height: 2.4rem; border: 0; border-radius: 999px; color: #fff; background: var(--pink-ink);
   display: grid; place-items: center;
 }
 .oracle-hint { text-align: center; color: #c4286a; font-size: 0.8rem; }
@@ -2509,7 +2509,7 @@ html.is-kb .oracle-pane.chat {
   flex: 1; border-radius: 0.7rem; background: rgb(255 255 255 / 0.78);
   color: #c4286a; font-size: 0.58rem; font-weight: 700;
 }
-.fal-steps li.on { color: #fff; background: #ff4fa3; }
+.fal-steps li.on { color: #fff; background: var(--pink-ink); }
 .fal-steps li.done { color: #fff; background: #ff7ab8; }
 .fal-steps button {
   display: flex; flex-direction: column; align-items: center; gap: 0.12rem;
@@ -2527,7 +2527,7 @@ html.is-kb .oracle-pane.chat {
   flex: 1 1 0; border: 0; min-height: 2.05rem; padding: 0.3rem 0.15rem; border-radius: 0.85rem;
   font-size: 0.7rem; font-weight: 750; color: #c4286a; background: #fff; box-shadow: 0 2px 0 #ffb3d4;
 }
-.clinic-tab.on { color: #fff; background: #ff4fa3; }
+.clinic-tab.on { color: #fff; background: var(--pink-ink); }
 .clinic.clinic-live .clinic-photo {
   position: relative !important; display: block !important; flex: 1 1 auto !important;
   width: 100% !important; min-height: 0 !important; max-height: none !important; aspect-ratio: auto !important;
@@ -2545,7 +2545,7 @@ html.is-kb .oracle-pane.chat {
 .canvas-cta { position: absolute; inset: 0; display: grid; place-items: center; }
 .canvas-load {
   border: 0; min-height: 2.4rem; padding: 0.45rem 1.15rem; border-radius: 999px;
-  font-weight: 800; color: #fff; background: #ff4fa3;
+  font-weight: 800; color: #fff; background: var(--pink-ink);
   box-shadow: 0 3px 0 #d63a86, 0 0 16px rgb(255 110 180 / 0.45);
 }
 .canvas-row { display: flex; justify-content: center; gap: 0.4rem; flex-shrink: 0; }
@@ -2554,14 +2554,14 @@ html.is-kb .oracle-pane.chat {
   font-size: 0.74rem; font-weight: 750; color: #c4286a; background: #fff; box-shadow: 0 2px 0 #ffb3d4;
 }
 .canvas-row button:disabled { opacity: 0.4; }
-.canvas-row button.save.on { color: #fff; background: #ff4fa3; }
+.canvas-row button.save.on { color: #fff; background: var(--pink-ink); }
 .clinic-chips { display: flex; flex-wrap: nowrap; gap: 0.35rem; overflow-x: auto; padding: 0.1rem 0 0.2rem; flex-shrink: 0; }
 .clinic-chip {
   display: inline-flex; flex: 0 0 auto; align-items: center; gap: 0.15rem; border: 0;
   min-height: 1.85rem; padding: 0.28rem 0.7rem; border-radius: 999px;
   font-size: 0.72rem; font-weight: 750; color: #c4286a; background: #fff; box-shadow: 0 2px 0 #ffb3d4; white-space: nowrap;
 }
-.clinic-chip.on { color: #fff; background: #ff4fa3; }
+.clinic-chip.on { color: #fff; background: var(--pink-ink); }
 .studio-chrome {
   position: absolute; top: 0.4rem; left: 0.4rem; right: 0.4rem; z-index: 5;
   display: flex; justify-content: space-between; pointer-events: none;
@@ -2601,6 +2601,27 @@ html.is-kb .oracle-pane.chat {
 .face-chip img { width: 3.2rem; height: 3.2rem; object-fit: cover; border-radius: 0.7rem; }
 
 /* ========== nav + clinic dock (do not cover tools) ========== */
+/* ─── MARKA PEMBESİ İKİYE AYRILDI ────────────────────────────────────
+   Ölçüldü (axe-core, WCAG 2.2 AA): beyaz yazı #ff4fa3 üstünde 3.04:1.
+   Gereken 4.5:1. Yani uygulamanın gördüğü İLK düğme (18+ kapısı) ve
+   beyaz yazı taşıyan on altı yüzey daha kontrastı geçmiyordu.
+
+   Pembeyi soldurmak yerine iki role ayrıldı:
+
+     --pink       #ff4fa3  SÜS. Parıltı, kenarlık, ikon, işaret. Üstünde
+                           yazı taşımaz, dolayısıyla kontrast kuralına
+                           tabi değil ve marka rengi hiç bozulmadı.
+     --pink-ink   #d6156e  YAZI TAŞIYAN dolgu. Beyazla 5.01:1 (AA).
+                           Hâlâ açıkça şeker pembesi, sadece daha doygun.
+
+   Bu ayrım kit doktrinindeki "deliberate button hierarchy" maddesinin
+   karşılığı: bir birincil renk, nötrler yükü taşır. */
+:root {
+  --pink: #ff4fa3;
+  --pink-ink: #d6156e;
+  --pink-ink-shade: #a80f52;
+}
+
 :root { --nav-h: 5.65rem; }
 .app-body {
   padding-bottom: calc(var(--nav-h) + env(safe-area-inset-bottom, 0px)) !important;
@@ -2721,8 +2742,8 @@ html.grok-preview .app-body {
 .legal-check input { width: 1.25rem; height: 1.25rem; accent-color: #ff4fa3; flex-shrink: 0; }
 .legal-go {
   width: 100%; min-height: 3rem; border: 0; border-radius: 999px;
-  font-size: 1.05rem; font-weight: 800; color: #fff; background: #ff4fa3;
-  box-shadow: 0 4px 0 #d63a86, 0 0 20px rgb(255 110 180 / 0.5);
+  font-size: 1.05rem; font-weight: 800; color: #fff; background: var(--pink-ink);
+  box-shadow: 0 4px 0 var(--pink-ink-shade), 0 0 20px rgb(255 110 180 / 0.42);
 }
 .legal-go:disabled { opacity: 0.4; box-shadow: none; }
 
@@ -2865,8 +2886,8 @@ html, body, #app, .phone-shell, .phone-frame {
   opacity: 1 !important;
 }
 .legal-go.on {
-  background: #ff4fa3 !important;
-  box-shadow: 0 4px 0 #d63a86, 0 0 20px rgb(255 110 180 / 0.55) !important;
+  background: var(--pink-ink) !important;
+  box-shadow: 0 4px 0 var(--pink-ink-shade), 0 0 20px rgb(255 110 180 / 0.55) !important;
 }
 .legal-gate {
   position: fixed !important;
@@ -2888,8 +2909,8 @@ html, body, #app, .phone-shell, .phone-frame {
   font-size: 1.02rem !important;
   font-weight: 800 !important;
   color: #fff !important;
-  background: #ff4fa3 !important;
-  box-shadow: 0 4px 0 #d63a86, 0 0 22px rgb(255 110 180 / 0.55) !important;
+  background: var(--pink-ink) !important;
+  box-shadow: 0 4px 0 var(--pink-ink-shade), 0 0 22px rgb(255 110 180 / 0.55) !important;
   opacity: 1 !important;
   pointer-events: auto !important;
   touch-action: manipulation !important;
@@ -3120,7 +3141,7 @@ html.is-kb .app-nav {
 }
 .clinic-tab.on, .clinic-chip.on, .canvas-row button.save.on, .studio-lane.on {
   color: #fff !important;
-  background: #ff4fa3 !important;
+  background: var(--pink-ink) !important;
 }
 .clinic-dock, .clinic-tabs, .clinic-chips, .canvas-row, .studio-toolbar, .studio-desk {
   display: flex !important;
@@ -3143,7 +3164,7 @@ html.is-kb .app-nav {
   border: 0;
   border-radius: 0 0.9rem 0.9rem 0;
   color: #fff;
-  background: #ff4fa3;
+  background: var(--pink-ink);
   box-shadow: 0 0 16px rgb(255 110 180 / 0.45);
 }
 .edge-tab svg { width: 1rem; height: 1rem; }
@@ -3251,4 +3272,199 @@ html.is-kb .app-nav {
 }
 .oracle-character p {
   font-style: italic;
+}
+
+/* ════════════════════════════════════════════════════════════════════
+   TASARIM KATMANI — plugin87/ux-ui-agent-skills doktrini
+
+   Bu blok EN SONDA duruyor çünkü dosyada sekiz rakip `.app-nav` kuralı ve
+   her yerde `!important` var. Kaskadla dövüşmek yerine niyetin tek yerde
+   ve gerekçeli durduğu bir katman.
+
+   Kitin "anti-slop" doktrininden uygulanan maddeler ve BULDUĞU KUSURLAR:
+
+   · "One primary, one accent max; neutrals carry the weight."
+     Uygulamada pembe HER ŞEYİ taşıyordu: başlık, ikon, düğme, menü,
+     etiket. Her şey vurguluysa hiçbir şey vurgu değildir. Sıcak nötr
+     bir zemin ve mürekkep eklendi; pembe birincil eyleme ve etkin
+     duruma çekildi.
+
+   · "Everything centered → no tension, no hierarchy."
+     Ana ekran boş bir boşlukta ortalanmış üç düğme gösteriyordu.
+
+   · Hiyerarşi kusuru (ölçüm değil, bakınca görülen): ana ekranın en
+     büyük öğesi "ZIP İNDİR"di — kaynağı paylaşan geliştirici aracı.
+     Kullanıcının geldiği iş fotoğraf eklemek.
+
+   · Alt menüde "Settings" etiketi taşıyordu, etiketler birbirine
+     yapışıktı.
+
+   · Fal ekranının alt paneli kırıktı: doğum tarihi alanı, devasa
+     yuvarlak bir düğme ve onunla ÜST ÜSTE BİNEN gönder düğmesi aynı
+     satırdaydı.
+
+   · "Generic drop shadow on every box → restrained, layered elevation."
+   ════════════════════════════════════════════════════════════════════ */
+
+:root {
+  /* Sıcak nötrler: yükü bunlar taşıyor, pembe değil. */
+  --ink: #3a2430;
+  --ink-soft: #7a5c6b;
+  --ink-faint: #a99099;
+  --paper: #fbf7f8;
+  --paper-raised: #ffffff;
+  --line: #efe2e7;
+
+  /* Tek katmanlı, ölçülü yükseklik. Her kutuya gölge YOK. */
+  --lift-1: 0 1px 2px rgb(58 36 48 / 0.05);
+  --lift-2: 0 6px 20px -8px rgb(58 36 48 / 0.16), 0 1px 2px rgb(58 36 48 / 0.05);
+
+  /* Tip ölçeği — bölüm düzeyinde büyük sıçramalar. */
+  --step-0: 0.8125rem;
+  --step-1: 0.9375rem;
+  --step-2: 1.125rem;
+  --step-3: 1.5rem;
+  --step-4: 2rem;
+}
+
+/* ─── ALT MENÜ ───────────────────────────────────────────────────────
+   Etiket taşması gerçek bir kusurdu: yedi sekme sabit yazı boyutuyla
+   390 piksele sığmıyor ve "Settings" kesiliyordu. Yazı ölçeklendi,
+   etiketler kırpılmak yerine sığdırıldı, çubuğa gerçek bir kenar
+   verildi (beyaz üstünde beyaz çubuğun sınırı görünmüyordu). */
+.nav-bar {
+  /* ÖLÇÜLDÜ: çubuk 390 piksellik alanda 275 piksel kaplıyordu — içeriğe
+     göre büzülüyor, sağda boşluk bırakıyordu. Yedi sekme 35'er piksellik
+     kürelere sıkışınca etiketler ("Projects", "Settings") kürelerin
+     dışına taşıyordu.
+
+     Tam genişlik + eşit pay: her sekmeye 390/7 ≈ 55 piksel düşüyor ve
+     etiket kendi payına sığıyor. */
+  width: 100%;
+  justify-content: space-between;
+  border-top: 1px solid var(--line);
+  box-shadow: var(--lift-2);
+}
+.nav-bar > * {
+  flex: 1 1 0;
+  min-width: 0;
+}
+.nav-bar span,
+.nav-bar em,
+.nav-bar small {
+  font-size: clamp(0.5625rem, 2.6vw, 0.6875rem);
+  letter-spacing: 0.005em;
+  line-height: 1.15;
+  white-space: nowrap;
+}
+
+/* ─── ANA EKRAN ──────────────────────────────────────────────────────
+   Üç eşit ağırlıklı düğme yerine gerçek bir sıra: fotoğraf birincil,
+   boş tuval ikincil, kaynak indirme sessiz bir bağlantı. */
+.home-actions {
+  flex-direction: column;
+  gap: 0.625rem;
+  width: min(100%, 20rem);
+}
+.home-actions > * {
+  width: 100%;
+}
+.zip-dl.is-quiet {
+  margin-top: 0.25rem;
+  padding: 0.5rem 0.75rem;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  box-shadow: none;
+  color: var(--ink-faint);
+  font-size: var(--step-0);
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.zip-dl.is-quiet:hover {
+  color: var(--ink-soft);
+}
+.mascot-kicker {
+  color: var(--ink-soft);
+  letter-spacing: 0.22em;
+}
+
+/* ─── FAL: ALT PANEL ─────────────────────────────────────────────────
+   Kırık düzenin düzeltmesi. Doğum tarihi kendi satırında; eylem
+   düğmeleri altında, üst üste binmeden, eşit yükseklikte. */
+.oracle-dock {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0.625rem;
+  padding: 0.75rem 0.875rem calc(0.75rem + env(safe-area-inset-bottom, 0px));
+}
+.oracle-dock > .oracle-birth {
+  order: -1;
+  padding: 0;
+}
+.oracle-dock .oracle-shot-btn,
+.oracle-dock .oracle-mid-send {
+  width: 100%;
+  min-height: 48px;
+  border-radius: 999px;
+  aspect-ratio: auto;
+  white-space: nowrap;
+}
+/* Fal ekranındaki gönder düğmesi artık akış içinde: mutlak konumdan
+   çıkarıldığı için bir başkasının üstüne binmesi mümkün değil. */
+.oracle-dock .oracle-mid-send {
+  position: static;
+  transform: none;
+}
+
+/* ─── OKUMA ──────────────────────────────────────────────────────────
+   Okuma bir mektup gibi okunmalı: sola dayalı, satır uzunluğu sınırlı,
+   bölümler arasında nefes. Ortalanmış kısa bloklar okuma ritmini kırar. */
+.oracle-letter section,
+.oracle-fade {
+  text-align: start;
+}
+.oracle-letter p,
+.oracle-fade p {
+  max-width: 34rem;
+  line-height: 1.55;
+  color: var(--ink);
+}
+.oracle-letter h3,
+.oracle-fade h3 {
+  margin-bottom: 0.15rem;
+  color: var(--ink-soft);
+  font-size: var(--step-0);
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+.oracle-character p {
+  border-inline-start: 2px solid var(--pink);
+  padding-inline-start: 0.75rem;
+}
+
+/* ─── ODAK ───────────────────────────────────────────────────────────
+   Klavyeyle gezen kullanıcı nerede olduğunu görmeli. Tek kural, her
+   etkileşimli öğe için. */
+:where(button, a, input, select, textarea, [tabindex]):focus-visible {
+  outline: 2px solid var(--pink-ink);
+  outline-offset: 2px;
+  border-radius: inherit;
+}
+
+/* ─── HAREKET ────────────────────────────────────────────────────────
+   Hareketi azaltma tercihi işletim sisteminde açıksa saygı gösterilir. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

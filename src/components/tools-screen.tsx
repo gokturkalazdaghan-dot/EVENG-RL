@@ -12,6 +12,7 @@ import {
   LIP_FILLERS,
 } from "@/lib/catalog";
 import { IMAGE_ACCEPT, ingestImageFile } from "@/lib/guard";
+import { t } from "@/lib/i18n";
 import { useDropFile } from "@/lib/drop-file";
 import { softNote } from "@/lib/soft-note";
 import type { SkinReport } from "@/lib/clinic-vision";
@@ -491,6 +492,7 @@ export function ToolsScreen() {
       <input
         ref={fileRef}
         type="file"
+        aria-label={t("photo_pick")}
         accept={IMAGE_ACCEPT}
         className="sr-only"
         onChange={(e) => {
@@ -665,6 +667,7 @@ export function ToolsScreen() {
             <span>{amount.label}</span>
             <input
               type="range"
+        aria-label={t("slider_amount")}
               min={20}
               max={90}
               value={amount.value}

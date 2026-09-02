@@ -1,4 +1,5 @@
 import { CrystalButton } from "@/components/crystal-button";
+import { t } from "@/lib/i18n";
 import { IMAGE_ACCEPT, ingestImageFile, takeFile } from "@/lib/guard";
 import { useApp } from "@/lib/store";
 import { useRef, useState } from "react";
@@ -72,6 +73,7 @@ export function CreateSheet() {
         <input
           ref={fileRef}
           type="file"
+        aria-label={t("photo_pick")}
           accept={IMAGE_ACCEPT}
           className="sr-only"
           onChange={(e) => void ingest(takeFile(e.currentTarget))}

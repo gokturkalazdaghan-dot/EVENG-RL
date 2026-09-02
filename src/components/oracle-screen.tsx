@@ -419,7 +419,8 @@ export function OracleScreen() {
         </section>
       </div>
 
-      <input ref={fileRef} type="file" accept={IMAGE_ACCEPT} className="sr-only" onChange={(e) => void onFile(e.currentTarget.files)} />
+      <input ref={fileRef} type="file"
+        aria-label={t("photo_pick")} accept={IMAGE_ACCEPT} className="sr-only" onChange={(e) => void onFile(e.currentTarget.files)} />
 
       {failed ? <p className="oracle-hint">{job?.error || t("fal_fail")}</p> : null}
 

@@ -1,4 +1,5 @@
 import { DragStrip } from "@/components/drag-strip";
+import { t } from "@/lib/i18n";
 import { gatedDownload } from "@/lib/download";
 import {
   ADJUST_SLIDERS,
@@ -224,6 +225,7 @@ function Intensity() {
       <span className="shrink-0 text-[10px] font-semibold tracking-wide uppercase" style={{ color: "#2a141c" }}>Yoğunluk</span>
       <input
         type="range"
+          aria-label={t("slider_amount")}
         min={10}
         max={100}
         value={intensity}
@@ -244,6 +246,7 @@ function BrushBar() {
         <span className="shrink-0 text-[10px] font-semibold tracking-wide text-muted uppercase">Fırça</span>
         <input
           type="range"
+          aria-label={t("slider_amount")}
           min={12}
           max={90}
           value={brushSize}
@@ -316,6 +319,7 @@ function ColorStrip() {
           <span>{s.label}</span>
           <input
             type="range"
+          aria-label={t("slider_amount")}
             min={-50}
             max={50}
             value={adjustments[s.key]}

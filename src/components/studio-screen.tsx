@@ -1,3 +1,4 @@
+import { t } from "@/lib/i18n";
 import { AtelierPanels } from "@/components/atelier-panels";
 import { CrystalButton } from "@/components/crystal-button";
 import { isDirty, TOOL_LABEL } from "@/lib/catalog";
@@ -442,6 +443,7 @@ export function StudioScreen() {
               <div className="absolute inset-y-0 w-0.5 bg-fg" style={{ left: `${split}%` }} />
               <input
                 type="range"
+        aria-label={t("slider_amount")}
                 min={8}
                 max={92}
                 value={split}
@@ -559,7 +561,8 @@ export function StudioScreen() {
       <div className="studio-desk-wrap">
         <AtelierPanels key={atelier} id={atelier} onPick={pickTool} picked={picked} />
       </div>
-      <input ref={fileRef} type="file" accept={IMAGE_ACCEPT} className="sr-only" onChange={(e) => onFile(takeFile(e.currentTarget))} />
+      <input ref={fileRef} type="file"
+        aria-label={t("photo_pick")} accept={IMAGE_ACCEPT} className="sr-only" onChange={(e) => onFile(takeFile(e.currentTarget))} />
       {plusOpen ? (
         <div className="absolute inset-0 z-40 flex flex-col justify-end bg-bg-deep/70 p-4" data-plus-sheet>
           <div className="panel-elevated rounded-3xl p-4">
