@@ -17,6 +17,7 @@ import {
 } from "@/lib/oracle-job";
 import { clearFalHold, loadFalHold, saveFalCups, saveFalDream, saveFalPalm } from "@/lib/fal-hold";
 import { readOracle, type OracleKind, type OracleLetter } from "@/lib/oracle";
+import { readOracleOnDevice } from "@/lib/oracle-device";
 import { withTimeout } from "@/lib/timed";
 import { ORACLE_AGENTS, WAIT_BOOKS } from "@/lib/oracle-canon";
 import { fetchSpark } from "@/lib/public-feed";
@@ -212,18 +213,43 @@ export function OracleScreen() {
       saveOracleJob(withSpark);
       setJob(withSpark);
     });
+    const images =
+      kind === "coffee" ? (cups.filter(Boolean) as string[]) : kind === "palm" && palm ? [palm] : [];
     try {
-      const res = await withTimeout<{ ok: true; letter: OracleLetter } | { ok: false; error: string }>(
+      /**
+       * ÖNCE SUNUCU, OLMAZSA CİHAZ.
+       *
+       * `readOracle` XAI_API_KEY ister; anahtar tanımlı değilse tek satır
+       * dönüyordu ("Reading is closed right now.") ve kahve falı, el falı,
+       * rüya tabirinin ÜÇÜ BİRDEN ölüydü — PRO ile satılan ana özellik.
+       *
+       * CLAUDE.md kuralı: "always keep on-device fallback." Cihaz üstü
+       * okuyucu fotoğrafı gerçekten ölçüyor (telve yoğunluğu, en büyük
+       * lekenin konumu ve biçimi, boşluk; avuçta bölgesel çizgi
+       * yoğunluğu ve süreklilik) ve geleneksel külliyattan uyan şıkkı
+       * seçiyor. Rastgele metin ÜRETMİYOR.
+       *
+       * Sunucu ağ hatası verirse de buraya düşülüyor: kullanıcının
+       * fincanı elinde kalmasın diye.
+       */
+      let res = await withTimeout<{ ok: true; letter: OracleLetter } | { ok: false; error: string }>(
         readOracle({
-          data: {
-            kind,
-            locale,
-            images: kind === "coffee" ? (cups.filter(Boolean) as string[]) : kind === "palm" && palm ? [palm] : [],
-            dream: kind === "dream" ? dream : undefined,
-          },
+          data: { kind, locale, images, dream: kind === "dream" ? dream : undefined },
         }),
         60_000,
-      );
+      ).catch(() => ({ ok: false as const, error: "" }));
+
+      if (!res.ok) {
+        const local = await readOracleOnDevice({
+          kind,
+          images,
+          dream: kind === "dream" ? dream : undefined,
+        });
+        // Cihaz da okuyamadıysa ONUN sebebi gösteriliyor: "üç açı gerekli",
+        // "avuçta çizgi seçilmedi" gibi mesajlar kullanıcıya ne yapacağını
+        // söyler; sunucunun genel "kapalı" mesajı söylemez.
+        res = local;
+      }
       const latest = loadOracleJob();
       if (!latest || latest.id !== next.id) return;
       const done: OracleJob = res.ok

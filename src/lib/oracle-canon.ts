@@ -47,51 +47,81 @@ export const ORACLE_AGENTS: Record<
   },
 };
 
-const COFFEE_SIGNS = [
-  "kuş: haber, mektup, gelen söz — kulpa yakınsa eve gelir, karşı ağızdaysa yabancıdan gelir",
-  "yol / patika: seçim veya yolculuk — kırık yol gecikme, çift yol iki irade",
-  "yüzük: bağ, söz, akit — kulpta evlilik/ev işi, dipte çoktan kurulmuş bağ",
-  "yılan: haset veya gizli sınav — kulpta ev içi kıskançlık, karşıda dış dil",
-  "ağaç: soy ve yavaş bereket — dipte kök, duvarda büyüme",
-  "dağ: tırmanılır engel — sivriyse sıkışma, yumuşaksa zaman",
-  "köprü: bağlayan kişi — kulpta aile, karşıda aracı",
-  "balık: rızık — sürü halinde bolluk, tek balık tek kapı",
-  "taç: onur, görünürlük",
-  "harf / sayı: bir ad veya tarih — gördüğün şekli aynen söyle",
-  "köpek: vefa — dişliyorsa ihanet korkusu, yatıksa sadık eşlik",
-  "at: hızlı haber",
-  "kalp: gönül işi — çatlak kalp kırık söz",
-  "anahtar: açılan kapı, yetki",
-  "kilit / kapı: tutulmuş mesele",
-  "göz: nazar veya uyanış",
-  "ay: kadın, gece işi, döngü",
-  "güneş: erkek, açık şan",
-  "çocuk: yeni iş veya haber",
-  "gemi: uzak iş, beklenen dönüş",
-  "kalın kara topak kulpta: evde oturan mesele",
-  "ince toz karşı ağızda: henüz eve girmemiş laf",
-  "beyaz boşluk: açılmış kapı",
-  "kırık çizgi: erteleme",
-].join("\n");
+/**
+ * Kahve sembol külliyatı — YAPISAL.
+ *
+ * Eskiden yalnızca `join("\n")` edilmiş bir metin bloğuydu ve tek
+ * müşterisi uzak modelin istem metniydi. Cihaz üstü okuyucu
+ * (`oracle-local.ts`) aynı külliyatı ölçülen işaretlerle eşleştirebilsin
+ * diye yapısal hale getirildi. İstem metni (`coffeeCanon`) aynı veriden
+ * türetiliyor — iki kopya tutulmuyor, biri güncellenip diğeri unutulamıyor.
+ */
+export interface CoffeeSign {
+  readonly sign: string;
+  readonly reading: string;
+}
 
-const PALM_SIGNS = [
-  "Kalp çizgisi (Venüs→Merkür): gönlün nasıl harcandığı. Derin ve düz = sakin bağlılık. Zincirli = kesik iş. Çatallı uç = iki gönül. Kısa = duygunun çabuk kapanması. Baş çizgisine yapışık başlangıç = akıl kalbi yönetir.",
-  "Baş çizgisi: akıl ve tasa. Uzun düz = soğuk muhakeme. Eğik Luna'ya = hayal. Ada = bir mevsim yorgunluk. Çatal = irade bölünmesi.",
-  "Hayat çizgisi: dirilik ve ev değişimi — ölüm yılı DEĞİL. Geniş yay = nefes. Sıkı başparmağa yapışık = ihtiyat. Kopuk = ev/iş kırılması. Ada = bitkin mevsim.",
-  "Kader / Satürn çizgisi: işin kişiyi bulması. Avuçtan yükselen = kendi emeği. Ay'dan = dış yardım. Kopuk = meslek değişimi.",
-  "Güneş / Apollon çizgisi: tanınma, sanat, şans. Yokluğu felaket değil; varlığı görünür iş.",
-  "Merkür çizgisi: söz ve ticaret. Çok kırık = dağınık konuşma.",
-  "Venüs tepesi (başparmak kökü): iştah, sevgi, beden ısısı. Dolgun = canlı gönül. Düz = çekingen.",
-  "Jüpiter tepesi (işaret kökü): onur, gurur. Yıldız = ani paye. Izgara = dağınık hırs.",
-  "Satürn tepesi: vazife, yalnızlık.",
-  "Apollon tepesi: zevk, şans.",
-  "Merkür tepesi: zeka, ticaret.",
-  "Luna tepesi: rüya, yol, su.",
-  "Mars: öfke ve cesaret — iç Mars (başparmak içi) savunu, dış Mars (perküsyon) saldırı.",
-  "Yıldız: ani iz. Haç: sınav. Üçgen: korunmuş akıl. Kare: siper. Ada: yorgunluk. Izgara: dağılma. Zincir: kesinti. Çatal: iki yol.",
-].join("\n");
+export const COFFEE_SIGN_TABLE: readonly CoffeeSign[] = [
+  { sign: "kuş", reading: "haber, mektup, gelen söz — kulpa yakınsa eve gelir, karşı ağızdaysa yabancıdan gelir" },
+  { sign: "yol / patika", reading: "seçim veya yolculuk — kırık yol gecikme, çift yol iki irade" },
+  { sign: "yüzük", reading: "bağ, söz, akit — kulpta evlilik/ev işi, dipte çoktan kurulmuş bağ" },
+  { sign: "yılan", reading: "haset veya gizli sınav — kulpta ev içi kıskançlık, karşıda dış dil" },
+  { sign: "ağaç", reading: "soy ve yavaş bereket — dipte kök, duvarda büyüme" },
+  { sign: "dağ", reading: "tırmanılır engel — sivriyse sıkışma, yumuşaksa zaman" },
+  { sign: "köprü", reading: "bağlayan kişi — kulpta aile, karşıda aracı" },
+  { sign: "balık", reading: "rızık — sürü halinde bolluk, tek balık tek kapı" },
+  { sign: "taç", reading: "onur, görünürlük" },
+  { sign: "harf / sayı", reading: "bir ad veya tarih — gördüğün şekli aynen söyle" },
+  { sign: "köpek", reading: "vefa — dişliyorsa ihanet korkusu, yatıksa sadık eşlik" },
+  { sign: "at", reading: "hızlı haber" },
+  { sign: "kalp", reading: "gönül işi — çatlak kalp kırık söz" },
+  { sign: "anahtar", reading: "açılan kapı, yetki" },
+  { sign: "kilit / kapı", reading: "tutulmuş mesele" },
+  { sign: "göz", reading: "nazar veya uyanış" },
+  { sign: "ay", reading: "kadın, gece işi, döngü" },
+  { sign: "güneş", reading: "erkek, açık şan" },
+  { sign: "çocuk", reading: "yeni iş veya haber" },
+  { sign: "gemi", reading: "uzak iş, beklenen dönüş" },
+  { sign: "kalın kara topak kulpta", reading: "evde oturan mesele" },
+  { sign: "ince toz karşı ağızda", reading: "henüz eve girmemiş laf" },
+  { sign: "beyaz boşluk", reading: "açılmış kapı" },
+  { sign: "kırık çizgi", reading: "erteleme" },
+];
 
-const DREAM_SIGNS: { keys: string[]; rule: string }[] = [
+const COFFEE_SIGNS = COFFEE_SIGN_TABLE.map((s) => `${s.sign}: ${s.reading}`).join("\n");
+
+
+export interface PalmSign {
+  readonly name: string;
+  readonly reading: string;
+}
+
+export const PALM_SIGN_TABLE: readonly PalmSign[] = [
+  { name: "Kalp çizgisi (Venüs→Merkür)", reading: "gönlün nasıl harcandığı. Derin ve düz = sakin bağlılık. Zincirli = kesik iş. Çatallı uç = iki gönül. Kısa = duygunun çabuk kapanması. Baş çizgisine yapışık başlangıç = akıl kalbi yönetir." },
+  { name: "Baş çizgisi", reading: "akıl ve tasa. Uzun düz = soğuk muhakeme. Eğik Luna'ya = hayal. Ada = bir mevsim yorgunluk. Çatal = irade bölünmesi." },
+  { name: "Hayat çizgisi", reading: "dirilik ve ev değişimi — ölüm yılı DEĞİL. Geniş yay = nefes. Sıkı başparmağa yapışık = ihtiyat. Kopuk = ev/iş kırılması. Ada = bitkin mevsim." },
+  { name: "Kader / Satürn çizgisi", reading: "işin kişiyi bulması. Avuçtan yükselen = kendi emeği. Ay'dan = dış yardım. Kopuk = meslek değişimi." },
+  { name: "Güneş / Apollon çizgisi", reading: "tanınma, sanat, şans. Yokluğu felaket değil; varlığı görünür iş." },
+  { name: "Merkür çizgisi", reading: "söz ve ticaret. Çok kırık = dağınık konuşma." },
+  { name: "Venüs tepesi (başparmak kökü)", reading: "iştah, sevgi, beden ısısı. Dolgun = canlı gönül. Düz = çekingen." },
+  { name: "Jüpiter tepesi (işaret kökü)", reading: "onur, gurur. Yıldız = ani paye. Izgara = dağınık hırs." },
+  { name: "Satürn tepesi", reading: "vazife, yalnızlık." },
+  { name: "Apollon tepesi", reading: "zevk, şans." },
+  { name: "Merkür tepesi", reading: "zeka, ticaret." },
+  { name: "Luna tepesi", reading: "rüya, yol, su." },
+  { name: "Mars", reading: "öfke ve cesaret — iç Mars (başparmak içi) savunu, dış Mars (perküsyon) saldırı." },
+  { name: "Yıldız", reading: "ani iz. Haç: sınav. Üçgen: korunmuş akıl. Kare: siper. Ada: yorgunluk. Izgara: dağılma. Zincir: kesinti. Çatal: iki yol." },
+];
+
+const PALM_SIGNS = PALM_SIGN_TABLE.map((s) => `${s.name}: ${s.reading}`).join("\n");
+
+
+export interface DreamSign {
+  readonly keys: readonly string[];
+  readonly rule: string;
+}
+
+export const DREAM_SIGNS: readonly DreamSign[] = [
   { keys: ["su", "deniz", "ırmak", "yağmur", "göl", "water", "sea", "rain"], rule: "İbn Sirin: su kalbin hali. Durgun berrak = gönül rahatı. Bulanık/taşkın = tasa. Deniz = büyük iş veya korku; sahil = sınır." },
   { keys: ["yılan", "snake"], rule: "İbn Sirin: yılan düşman veya gizli söz. Öldürmek = düşmanı yenmek. Evde yılan = ev içi kıskançlık." },
   { keys: ["diş", "teeth"], rule: "Diş dökümü tıp tablosu değil: soy, itibar veya bir yakının haberi korkusu. Üst diş = erkek hısım, alt = kadın hısım (klasik tabir)." },
