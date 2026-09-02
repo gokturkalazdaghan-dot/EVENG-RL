@@ -1,0 +1,152 @@
+/*
+ * EVEN GIRL — Android uygulama modülü.
+ *
+ * Bu dosyada güvenlikle doğrudan ilgili üç ayar vardır:
+ *   1. release > minifyEnabled/shrinkResources  -> R8 karartma
+ *   2. release > ndk.debugSymbolLevel           -> native sembol temizliği
+ *   3. verifyReleaseHardening görevi            -> yapılandırma kaymasını kırar
+ */
+apply plugin: "com.android.application"
+apply plugin: "org.jetbrains.kotlin.android"
+apply plugin: "com.facebook.react"
+
+android {
+    namespace "com.evengirl.app"
+    compileSdk 35
+    ndkVersion "26.1.10909125"
+
+    defaultConfig {
+        applicationId "com.evengirl.app"
+        minSdk 26          // EncryptedSharedPreferences + StrongBox için gerekli taban
+        targetSdk 35
+        versionCode 1
+        versionName "1.0.0"
+    }
+
+    signingConfigs {
+        release {
+            // Anahtarlar repoda DURMAZ; CI secret'larından okunur.
+            storeFile System.getenv("AIGUARD_KEYSTORE_PATH") ? file(System.getenv("AIGUARD_KEYSTORE_PATH")) : null
+            storePassword System.getenv("AIGUARD_KEYSTORE_PASSWORD")
+            keyAlias System.getenv("AIGUARD_KEY_ALIAS")
+            keyPassword System.getenv("AIGUARD_KEY_PASSWORD")
+        }
+    }
+
+    buildTypes {
+        debug {
+            // Debug'da karartma KAPALI: aksi halde geliştirici yığın izleri
+            // okunamaz ve hata ayıklama imkânsızlaşır.
+            minifyEnabled false
+            applicationIdSuffix ".debug"
+        }
+
+        release {
+            signingConfig signingConfigs.release
+
+            // R8: kod atma + karartma. `-dontobfuscate` proguard-rules.pro
+            // içinde BULUNMAMALIDIR (varsa yalnızca shrink yapılır).
+            minifyEnabled true
+            shrinkResources true
+
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
+
+            // Native (.so) sembolleri strip edilir; sembollü kopya yalnızca
+            // Play Console'a yüklenir (crash deobfuscation için).
+            ndk { debugSymbolLevel "SYMBOL_TABLE" }
+
+            // Play App Signing kullanıldığı için upload key ile imzalanır.
+            // AAB içindeki mapping.txt Play'e otomatik yüklenir, KULLANICIYA
+            // DAĞITILMAZ.
+            buildConfigField "boolean", "SECURITY_ENFORCED", "true"
+        }
+    }
+
+    buildFeatures {
+        buildConfig true
+    }
+
+    packagingOptions {
+        // Debug sembolleri ve kotlin metadata'sı release'te taşınmaz.
+        exclude "META-INF/*.version"
+        exclude "kotlin/**"
+        exclude "DebugProbesKt.bin"
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+    kotlinOptions {
+        jvmTarget = "17"
+    }
+}
+
+dependencies {
+    implementation "com.facebook.react:react-android"
+    implementation "com.facebook.react:hermes-android"
+
+    // Şifreli yerel depolama (Keystore destekli)
+    implementation "androidx.security:security-crypto:1.1.0-alpha06"
+
+    // SSL pinning
+    implementation "com.squareup.okhttp3:okhttp:4.12.0"
+
+    // Play Billing — yalnızca abonelik yönetimi ve uygulama içi mesajlar için
+    // (satın alma akışı RevenueCat üzerinden yürür, bkz. BillingService.ts)
+    implementation "com.android.billingclient:billing-ktx:7.1.1"
+
+    // Storage Access Framework sarmalayıcısı — bulut taslakları için.
+    // Google Drive SDK'sı BİLEREK kullanılmıyor: Sign-In isterdi ve kimlik
+    // bilgisi talep etmeme kuralını bozardı (bkz. storage/CloudDraftsModule.kt).
+    implementation "androidx.documentfile:documentfile:1.0.1"
+
+    // Cihaz üstü çıkarım (Modül 4'te kullanılacak)
+    implementation "org.tensorflow:tensorflow-lite:2.16.1"
+    implementation "org.tensorflow:tensorflow-lite-gpu:2.16.1"
+}
+
+/**
+ * Yapılandırma kaymasına karşı sigorta.
+ *
+ * Bu görev olmadan biri `minifyEnabled false` yapıp release çıkarabilir ve
+ * kimse fark etmez. Build'i kırmak, code review'a güvenmekten daha güvenilirdir.
+ */
+tasks.register("verifyReleaseHardening") {
+    doLast {
+        def rules = file("proguard-rules.pro").text
+        if (rules.contains("-dontobfuscate")) {
+            throw new GradleException("proguard-rules.pro içinde -dontobfuscate var: release karartılmıyor")
+        }
+
+        def release = android.buildTypes.release
+        if (!release.minifyEnabled) {
+            throw new GradleException("release.minifyEnabled false — karartma kapalı")
+        }
+
+        def manifest = file("src/main/AndroidManifest.xml").text
+        if (!manifest.contains("networkSecurityConfig")) {
+            throw new GradleException("AndroidManifest içinde networkSecurityConfig tanımlı değil")
+        }
+        if (manifest.contains("android:debuggable=\"true\"")) {
+            throw new GradleException("Manifest içinde debuggable=true")
+        }
+
+        def signature = file("src/main/java/com/evengirl/app/security/SignatureVerifier.kt").text
+        if (signature.contains("REPLACE_WITH_RELEASE_SIGNING_CERT_SHA256_BASE64")) {
+            throw new GradleException("SignatureVerifier: release imza özeti doldurulmamış")
+        }
+
+        def pins = file("src/main/java/com/evengirl/app/security/PinnedHttpClient.kt").text
+        if (pins.contains("sha256/AAAAAAAA")) {
+            throw new GradleException("PinnedHttpClient: gerçek SPKI pin'leri doldurulmamış")
+        }
+    }
+}
+
+tasks.matching { it.name == "bundleRelease" || it.name == "assembleRelease" }.configureEach {
+    dependsOn "verifyReleaseHardening"
+}

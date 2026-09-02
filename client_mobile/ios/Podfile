@@ -1,0 +1,41 @@
+# EVEN GIRL — CocoaPods yapılandırması
+#
+# `use_frameworks!` KULLANILMIYOR: Hermes ve bazı native modüller statik
+# kütüphane bekler; framework moduna geçmek onları sessizce devre dışı
+# bırakır ve hata ancak çalışma anında görülür.
+
+require Pod::Executable.execute_command('node', ['-p',
+  'require.resolve(
+    "react-native/scripts/react_native_pods.rb",
+    {paths: [process.argv[1]]},
+  )', __dir__]).strip
+
+platform :ios, '15.1'
+prepare_react_native_project!
+
+target 'EvenGirl' do
+  config = use_native_modules!
+
+  use_react_native!(
+    :path => config[:reactNativePath],
+    # Yeni mimari — Android tarafıyla AYNI olmalı; ayrışırsa iki platform
+    # farklı köprü kullanır ve hatalar yalnızca birinde görünür.
+    :app_path => "#{Pod::Config.instance.installation_root}/.."
+  )
+
+  post_install do |installer|
+    react_native_post_install(
+      installer,
+      config[:reactNativePath],
+      :mac_catalyst_enabled => false,
+    )
+
+    # Minimum dağıtım hedefi tüm pod'larda eşitlenir; bazı pod'lar daha
+    # düşük hedefle gelir ve Xcode 15+ uyarıyı hataya çevirir.
+    installer.pods_project.targets.each do |target|
+      target.build_configurations.each do |cfg|
+        cfg.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '15.1'
+      end
+    end
+  end
+end

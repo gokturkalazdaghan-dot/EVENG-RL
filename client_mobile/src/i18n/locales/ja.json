@@ -1,0 +1,417 @@
+{
+  "common": {
+    "retry": "再試行",
+    "cancel": "キャンセル",
+    "close": "閉じる",
+    "continue": "続ける",
+    "back": "戻る",
+    "loading": "処理中…"
+  },
+  "paywall": {
+    "title": "EVEN GIRL Pro",
+    "subtitle": "すべてのAIツールを、広告なしで。",
+    "period": {
+      "week": "週あたり",
+      "month": "月あたり",
+      "year": "年あたり"
+    },
+    "perWeek": "週あたり {{price}}",
+    "savings": "{{percent}}% おトク",
+    "bestValue": "いちばんおトク",
+    "freeTrialBadge": "{{count}}日間無料",
+    "cta": {
+      "startTrial": "{{count}}日間無料で試す",
+      "subscribe": "登録する"
+    },
+    "disclosure": {
+      "trial": "{{trialDays}}日間の無料トライアル終了後に {{price}} が請求され、サブスクリプションは自動更新されます。料金が発生しないようにするには、トライアル終了の24時間前までに解約してください。解約はストアの設定からいつでも可能です。",
+      "standard": "{{price}} が請求され、サブスクリプションは自動更新されます。解約はストアの設定からいつでも可能です。"
+    },
+    "restore": "購入を復元",
+    "restored": "サブスクリプションを復元しました。",
+    "nothingToRestore": "このアカウントに復元できるサブスクリプションはありませんでした。",
+    "terms": "サブスクリプション規約",
+    "privacy": "プライバシーポリシー",
+    "manage": "サブスクリプションを管理",
+    "requiredForFeature": "このツールには EVEN GIRL Pro が必要です。",
+    "billingIssue": "お支払い方法に問題があります。ご利用を続けるにはストアの設定で更新してください。",
+    "error": {
+      "productsUnavailable": "プランを読み込めませんでした。通信状況を確認して、もう一度お試しください。",
+      "purchaseFailed": "購入を完了できませんでした。請求は発生していません。",
+      "restoreFailed": "復元を完了できませんでした。もう一度お試しください。"
+    }
+  },
+  "ethics": {
+    "consentRequired": "続けるには規約への同意が必要です。",
+    "generalTitle": "生成AIについて",
+    "generalBody": "これらのツールはAIでコンテンツを生成します。作成した内容が著作権と法律を守っているかについては、お客様が責任を負います。他者の作品を許可なく使用しないでください。",
+    "faceTitle": "顔写真について",
+    "faceBody": "顔編集ツールは、ご自身の写真、または明確な許可を得た方の写真にのみ使用してください。同意のない顔の使用や、誤解を招くコンテンツの作成は法律に違反します。",
+    "accept": "理解して同意する",
+    "decline": "同意しない"
+  },
+  "storage": {
+    "title": "ストレージ",
+    "usedOfLimit": "上限 {{limit}} の {{percent}}%",
+    "renderCache": "一時的な書き出しファイル",
+    "thumbnails": "プレビュー",
+    "models": "オフラインAIモデル",
+    "clearTemporary": "一時ファイルを削除",
+    "clearModels": "オフラインモデルも削除",
+    "clearModelsHint": "モデルを削除すると、再ダウンロードするまでオフラインツールは使用できません。"
+  },
+  "errors": {
+    "NETWORK_UNAVAILABLE": "インターネットに接続していません。",
+    "offlineFeatureUnavailable": "このツールにはインターネット接続が必要です。",
+    "deviceTooWeak": "この処理はお使いの端末には重すぎます。オンラインになればサーバーで実行できます。",
+    "MODEL_UNAVAILABLE": "このツールは現在利用できません。",
+    "THERMAL_THROTTLED": "端末が熱くなっています。冷めると処理が速くなります。",
+    "CACHE_WRITE_FAILED": "端末の空き容量が足りません。",
+    "UNKNOWN": "問題が発生しました。"
+  },
+  "security": {
+    "blocked": {
+      "generic": "安全な動作環境を確認できませんでした。",
+      "compromised": "この端末ではセキュリティチェックを完了できませんでした。",
+      "runtime": "セキュリティチェックが中断されました。"
+    }
+  },
+  "tools": {
+    "crop": "トリミング",
+    "color-filter": "フィルター",
+    "trim": "カット",
+    "auto-resize": "サイズ変更",
+    "magic-eraser": "マジック消しゴム",
+    "lens-blur": "レンズぼかし",
+    "generative-remove": "生成消去",
+    "generative-expand": "AI拡張",
+    "face-restore": "顔の復元",
+    "hd-upscale": "HD高画質化",
+    "studio-background": "スタジオ背景",
+    "ai-avatar": "AIアバター",
+    "age-transform": "年齢変換",
+    "concept-portrait": "コンセプトポートレート",
+    "auto-captions": "自動字幕",
+    "object-tracking": "オブジェクト追跡",
+    "smart-slowmo": "スマートスローモーション",
+    "text-to-video": "テキストから動画",
+    "smart-template": "スマートテンプレート",
+    "manual-reshape": "手動リシェイプ",
+    "botox-jawline": "フェイスライン",
+    "skin-smooth": "肌なめらか",
+    "blemish-eraser": "シミ消し",
+    "even-generate": "Even Girl Generate",
+    "light-sync": "ライト合わせ",
+    "cinematic-bokeh": "シネマティックボケ",
+    "pore-preserve": "毛穴ディテール"
+  },
+  "editor": {
+    "emptyCanvas": "キャンバス — 編集するメディアを選択",
+    "selectItem": "ツールを表示するには項目を選択してください",
+    "badge": {
+      "offline": "オフライン",
+      "online": "オンライン",
+      "cooling": "冷却中"
+    },
+    "hint": {
+      "thermalDisabled": "端末が熱いため一時的に利用できません",
+      "networkRequired": "このツールにはインターネット接続が必要です"
+    },
+    "running": "{{tool}} を実行中…",
+    "noSourceSelected": "まず写真または動画を選んでください。",
+    "pickerUnavailable": "この端末ではメディア選択を利用できません。"
+  },
+  "settings": {
+    "title": "設定",
+    "feedback": {
+      "title": "フィードバックを送る",
+      "subtitle": "ご意見・ご要望・ご不満を直接お送りください。",
+      "category": {
+        "feedback": "フィードバック",
+        "request": "ご要望",
+        "complaint": "ご不満"
+      },
+      "bodyPlaceholder": "こちらにメッセージをご記入ください:",
+      "diagnosticsHeading": "技術情報（サポート用 — 削除しても構いません）:",
+      "noMailApp": "お使いの端末でメールアプリが見つかりませんでした。こちらまでご連絡ください:",
+      "copyHint": "アドレスを長押しするとコピーできます。"
+    },
+    "privacy": {
+      "title": "プライバシー",
+      "crashReporting": "匿名のクラッシュレポート",
+      "crashReportingHint": "個人情報は含まれません。エラーが発生したコード行のみを送信します。",
+      "revokeConsent": "AIの同意をリセット",
+      "revokeConsentDone": "同意をリセットしました。次回使用時に再度確認します。"
+    },
+    "legal": {
+      "title": "法的事項",
+      "terms": "サブスクリプション規約",
+      "privacy": "プライバシーポリシー"
+    },
+    "version": "バージョン {{version}}",
+    "poweredBy": "Powered by ARMANALABS",
+    "linkFailed": "この端末ではリンクを開けませんでした。"
+  },
+  "nav": {
+    "projects": "プロジェクト",
+    "create": "作成",
+    "storage": "ストレージ",
+    "settings": "設定",
+    "feed": "フィード",
+    "leaderboard": "ランキング"
+  },
+  "projects": {
+    "empty": "プロジェクトはまだありません",
+    "emptyHint": "右にスワイプして作成",
+    "new": "新規",
+    "untitled": "無題",
+    "versionCount": "{{count}} バージョン",
+    "original": "オリジナル",
+    "openFailed": "このプロジェクトを開けませんでした。削除はされていません。"
+  },
+  "age": {
+    "title": "年齢を確認",
+    "subtitle": "EVEN GIRL は年齢に合った体験を提供するために生年月日をお尋ねします。生年月日が端末外に送られることはありません。",
+    "day": "日",
+    "month": "月",
+    "year": "年",
+    "confirm": "続ける",
+    "months": [
+      "1月",
+      "2月",
+      "3月",
+      "4月",
+      "5月",
+      "6月",
+      "7月",
+      "8月",
+      "9月",
+      "10月",
+      "11月",
+      "12月"
+    ],
+    "error": {
+      "invalid-date": "有効な日付を選んでください。",
+      "future-date": "生年月日を未来に設定することはできません。",
+      "implausible-age": "有効な生年を選んでください。"
+    },
+    "safeMode": {
+      "title": "セーフモードがオンです",
+      "body": "18歳未満のため、成人向けコンテンツは非表示になり、知らない人からのメッセージはオフになっています。編集ツールはすべてご利用いただけます。",
+      "gotIt": "わかりました"
+    },
+    "recheck": "年齢を再確認する",
+    "privacyNote": "生年月日は保存されません。成人かどうかの情報のみが端末内に暗号化して保存されます。"
+  },
+  "cloud": {
+    "unavailable": "この端末ではクラウドバックアップを利用できません。",
+    "meteredConfirmRequired": "このバックアップはモバイルデータを使用します。続けますか？",
+    "zeroDeletionNote": "クラウド上のプロジェクトが自動的に削除されることはありません。削除できるのはあなただけです。",
+    "conflictTitle": "このプロジェクトは2台の端末で編集されました",
+    "conflictBody": "どちらのバージョンを残すか選んでください。選ばなかった方も削除されず、コピーとして保存されます。",
+    "backup": "このプロジェクトをバックアップ",
+    "backingUp": "バックアップ中…",
+    "backedUp": "あなたのクラウドにバックアップしました。",
+    "backupFailed": "バックアップに失敗しました。プロジェクトはそのままです。"
+  },
+  "moderation": {
+    "title": "この投稿",
+    "action": {
+      "report": "報告する",
+      "reportHint": "チームが確認し、24時間以内に対応します。",
+      "block": "このユーザーをブロック",
+      "blockHint": "この人の投稿やメッセージは今後表示されません。",
+      "unblock": "ブロックを解除"
+    },
+    "reasonTitle": "報告の理由を選んでください",
+    "sentTitle": "報告を受け付けました",
+    "sentBody": "チームが確認します。ありがとうございます。",
+    "sentSuspended": "確認が完了するまで、この内容は非表示になります。",
+    "report": {
+      "failed": "報告を送信できませんでした。通信状況を確認して、もう一度お試しください。",
+      "ownContent": "自分のコンテンツは報告できません。",
+      "already": "すでに報告済みです。確認しています。"
+    },
+    "reason": {
+      "minor-safety": "未成年者が写っている",
+      "nonconsensual-intimate": "同意のない性的な画像",
+      "sexual-content-unlabeled": "ラベルのない性的コンテンツ",
+      "harassment": "嫌がらせ・いじめ",
+      "hate-speech": "ヘイトスピーチ",
+      "violence": "暴力",
+      "impersonation": "なりすまし",
+      "copyright": "著作権侵害",
+      "spam": "スパム",
+      "other": "その他"
+    },
+    "blockedList": {
+      "title": "ブロックしたアカウント",
+      "empty": "ブロックしている人はいません",
+      "unblock": "ブロックを解除"
+    },
+    "adultLabel": "18+",
+    "sensitiveLabel": "センシティブな内容",
+    "tapToReveal": "タップして表示",
+    "blockedNotice": "このアカウントをブロックしています。コンテンツは非表示です。"
+  },
+  "feed": {
+    "empty": "フィードは空です。いくつかアカウントをフォローしてみましょう。",
+    "loadFailed": "フィードを読み込めませんでした。通信状況を確認してください。"
+  },
+  "leaderboard": {
+    "title": "週間 Even ランキング",
+    "resetsIn": "{{hours}}時間後にリセット",
+    "you": "あなた",
+    "yourRank": "{{rank}}位 · {{score}}ポイント",
+    "notListed": "{{score}}ポイント",
+    "empty": "今週はまだ誰もポイントを獲得していません。",
+    "safeModeNotice": "セーフモードでは公開リストに名前は表示されません。スコアとバッジはご自身には表示されます。"
+  },
+  "dm": {
+    "unavailable": "この端末では暗号化メッセージを利用できません。",
+    "decryptFailed": "このメッセージを復号できませんでした。チャットを更新してください。",
+    "reportContextNotice": "報告と一緒に、このメッセージと直前の{{count}}件が管理チームに送信されます。それ以外のメッセージは送信されません。",
+    "safetyNumber": "安全番号",
+    "safetyNumberHint": "相手とこの番号を照合すると、チャットが安全であることを確認できます。",
+    "sendFailed": "メッセージを送信できませんでした。入力内容はそのまま残っています。もう一度お試しください。",
+    "placeholder": "メッセージを入力",
+    "send": "送信"
+  },
+  "market": {
+    "title": "テンプレートマーケット",
+    "loadFailed": "テンプレートを読み込めませんでした。",
+    "use": "適用",
+    "proOnly": "PRO",
+    "creatorOnly": "クリエイター登録者",
+    "useCount": "{{count}}回使用"
+  },
+  "creator": {
+    "productUnavailable": "このクリエイター登録は現在ご利用いただけません。",
+    "subscribe": "登録する",
+    "subscribed": "登録済み"
+  },
+  "activity": {
+    "title": "アクティビティのプライバシー",
+    "lastSeen": "最終ログイン",
+    "onlineBadge": "オンライン表示",
+    "ghostMode": "ゴーストモード",
+    "ghostModeHint": "EVEN PRO 限定。最終ログイン、オンライン表示、入力中表示、既読を非表示にします。",
+    "reciprocityNotice": "自分のアクティビティを非表示にすると、他の人のアクティビティも見られなくなります。EVEN PRO 会員にも適用されます。",
+    "audience": {
+      "everyone": "全員",
+      "mutuals": "相互フォロー",
+      "nobody": "非公開"
+    },
+    "dmTitle": "メッセージを送れる人",
+    "dmAudience": {
+      "everyone": "全員",
+      "following": "フォロー中の人",
+      "mutuals": "相互フォロー",
+      "nobody": "誰も送れない"
+    },
+    "allowRequests": "メッセージリクエストを許可"
+  },
+  "onboarding": {
+    "title": "EVEN GIRL PRO",
+    "subtitle": "無制限の生成、ウォーターマークなしの書き出し、すべてのスタジオツール。",
+    "continueFree": "購入せずに続ける",
+    "benefits": [
+      "AI生成と書き出しが無制限",
+      "ウォーターマークなし・フル解像度の書き出し",
+      "24時間ストーリーと暗号化メッセージ",
+      "ゴーストモードと限定ガーランドバッジ",
+      "広告なしの完全にクリーンな体験"
+    ]
+  },
+  "generate": {
+    "title": "Even Girl Generate",
+    "conceptHint": "コンセプトを3〜5語でまとめてください",
+    "conceptPlaceholder": "例：サイバーパンクの街、ネオンの光",
+    "referenceHint": "参考写真を5枚アップロード",
+    "generate": "生成",
+    "error": {
+      "too-few-references": "参考写真が5枚必要です。",
+      "too-many-references": "参考写真は最大5枚までです。",
+      "too-few-words": "コンセプトは3語以上必要です。",
+      "too-many-words": "コンセプトは最大5語までです。",
+      "empty-concept": "コンセプトを入力してください。"
+    },
+    "opensDedicatedFlow": "Even Girl Generate は専用画面で開きます。"
+  },
+  "export": {
+    "freeRightUsed": "無料ダウンロード枠を使い切りました。",
+    "freeRightRemaining": "無料ダウンロードがあと{{count}}回あります。",
+    "captureBlocked": "スクリーンショットと画面録画には PRO が必要です。",
+    "upgradeToExport": "ダウンロードを続けるには PRO にアップグレードしてください。",
+    "saved": "ギャラリーに保存しました。",
+    "capture": {
+      "recordingBlocked": "画面収録中のため、プレビューを非表示にしました。",
+      "screenshotNotice": "無料ダウンロードは使用済みです。透かしなしで保存するには登録してください。",
+      "gateTitle": "プレビューを非表示",
+      "gateBody": "無料ダウンロードは使用済みです。EVEN GIRL Pro なら透かしなし・無制限で保存できます。",
+      "gateAction": "EVEN GIRL Pro を見る"
+    },
+    "save": "ギャラリーに保存",
+    "saving": "保存中…",
+    "failed": "保存できませんでした。プロジェクトはそのままです。",
+    "permissionDenied": "ギャラリーへの追加が許可されませんでした。",
+    "saveUnsupported": "このAndroidバージョンではギャラリーへの保存を利用できません。共有をご利用ください。",
+    "saverUnavailable": "この端末では保存を利用できません。"
+  },
+  "studio": {
+    "manualTitle": "マニュアル & ボトックススタジオ",
+    "manualSubtitle": "無料・無制限。強制的なブラシ操作はありません。すべてあなたの思いのままに。",
+    "region": {
+      "jawline": "あご輪郭",
+      "cheek": "頬",
+      "nose": "鼻",
+      "eyes": "目",
+      "lips": "唇",
+      "chin": "あご",
+      "waist": "ウエスト",
+      "hips": "ヒップ",
+      "legs": "脚",
+      "shoulders": "肩"
+    },
+    "botox": "ボトックス効果",
+    "smooth": "肌のなめらか補正",
+    "preservePores": "毛穴を残す",
+    "blemish": "シミ消し",
+    "modeManual": "マニュアル",
+    "modeGenerate": "AI Generate"
+  },
+  "share": {
+    "title": "シェア",
+    "instagram": "Instagram ストーリーズ",
+    "whatsapp": "WhatsApp ステータス",
+    "system": "他のアプリ",
+    "failed": "シェアを完了できませんでした。",
+    "notInstalled": "そのアプリは端末にインストールされていません。"
+  },
+  "reward": {
+    "push": {
+      "title": "今週のごほうびが届きました",
+      "body": "{{rank}}位でした。{{days}}日間の無料PROコードをご用意しました。"
+    },
+    "pendingTitle": "未使用のごほうびがあります",
+    "pendingBody": "{{days}}日間の無料PROコードをストアから利用できます。",
+    "redeem": "コードを使う",
+    "redeemFailed": "コードの利用ページを開けませんでした。もう一度お試しください。",
+    "expiresIn": "あと{{days}}日で期限切れ",
+    "storeNote": "コードはストアのページで利用します。サブスクリプションはストアのアカウントに表示され、いつでも解約できます。",
+    "available": "{{rank}} 位 — PRO を {{days}} 日間無料"
+  },
+  "profile": {
+    "postCount": "{{count}}件の投稿",
+    "empty": "まだ投稿がありません。"
+  },
+  "story": {
+    "expired": "このストーリーは期限切れです。",
+    "remainingHours": "残り{{count}}時間",
+    "previous": "前のストーリー",
+    "next": "次のストーリー"
+  },
+  "models": {
+    "meteredConfirmRequired": "このツールにはモバイルデータでの一度きりのダウンロードが必要です。続けますか？"
+  }
+}

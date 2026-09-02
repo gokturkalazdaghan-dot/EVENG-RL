@@ -1,0 +1,23 @@
+{
+  "name": "even-girl-backend",
+  "version": "1.0.0",
+  "private": true,
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "migrate": "node persistence/migrate.js",
+    "test": "node --test $(find tests -name '*.test.js' | sort)",
+    "verify": "npm test && node tools/verify-store-products.mjs",
+    "verify:release": "node tools/verify-release-ready.mjs",
+    "pins:set": "node tools/set-ssl-pins.mjs",
+    "release:set": "node tools/set-release-values.mjs",
+    "models:sync": "node tools/sync-model-digests.mjs"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "express": "^4.19.2"
+  },
+  "description": "EVEN GIRL — abonelik webhook ve yetki uçları (Powered by ARMANALABS)"
+}

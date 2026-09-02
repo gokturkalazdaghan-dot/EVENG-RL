@@ -1,0 +1,417 @@
+{
+  "common": {
+    "retry": "Try again",
+    "cancel": "Cancel",
+    "close": "Close",
+    "continue": "Continue",
+    "back": "Back",
+    "loading": "Working…"
+  },
+  "paywall": {
+    "title": "EVEN GIRL Pro",
+    "subtitle": "Every AI tool, no ads.",
+    "period": {
+      "week": "per week",
+      "month": "per month",
+      "year": "per year"
+    },
+    "perWeek": "{{price}} per week",
+    "savings": "Save {{percent}}%",
+    "bestValue": "Best value",
+    "freeTrialBadge": "{{count}}-day free trial",
+    "cta": {
+      "startTrial": "Start {{count}}-day free trial",
+      "subscribe": "Start subscription"
+    },
+    "disclosure": {
+      "trial": "After your {{trialDays}}-day free trial you will be charged {{price}} and the subscription renews automatically. Cancel at least 24 hours before the trial ends to avoid charges. You can cancel any time in your store settings.",
+      "standard": "You will be charged {{price}} and the subscription renews automatically. You can cancel any time in your store settings."
+    },
+    "restore": "Restore purchases",
+    "restored": "Your subscription has been restored.",
+    "nothingToRestore": "No subscription was found to restore on this account.",
+    "terms": "Subscription terms",
+    "privacy": "Privacy policy",
+    "manage": "Manage subscription",
+    "requiredForFeature": "This tool requires EVEN GIRL Pro.",
+    "billingIssue": "There is a problem with your payment method. Update it in your store settings to keep access.",
+    "error": {
+      "productsUnavailable": "Subscription options could not be loaded. Check your connection and try again.",
+      "purchaseFailed": "The purchase could not be completed. You were not charged.",
+      "restoreFailed": "Restore could not be completed. Please try again."
+    }
+  },
+  "ethics": {
+    "consentRequired": "You need to accept the terms to continue.",
+    "generalTitle": "About generative AI",
+    "generalBody": "These tools generate content with AI. You are responsible for making sure what you create respects copyright and the law. Do not use others' work without permission.",
+    "faceTitle": "About face images",
+    "faceBody": "Only use face editing tools on your own photos or on photos of people who gave you explicit permission. Using someone's face without consent, or creating misleading content, is against the law.",
+    "accept": "I understand and accept",
+    "decline": "I do not accept"
+  },
+  "storage": {
+    "title": "Storage",
+    "usedOfLimit": "{{percent}}% of the {{limit}} limit",
+    "renderCache": "Temporary render files",
+    "thumbnails": "Previews",
+    "models": "Offline AI models",
+    "clearTemporary": "Clear temporary files",
+    "clearModels": "Also delete offline models",
+    "clearModelsHint": "If you delete the models, offline tools will not work until they are downloaded again."
+  },
+  "errors": {
+    "NETWORK_UNAVAILABLE": "No internet connection.",
+    "offlineFeatureUnavailable": "This tool requires an internet connection.",
+    "deviceTooWeak": "This task is too heavy for your device. It can run on the server once you are online.",
+    "MODEL_UNAVAILABLE": "This tool is unavailable right now.",
+    "THERMAL_THROTTLED": "Your device is warm. This will finish faster once it cools down.",
+    "CACHE_WRITE_FAILED": "Not enough space on the device.",
+    "UNKNOWN": "Something went wrong."
+  },
+  "security": {
+    "blocked": {
+      "generic": "Secure environment could not be verified.",
+      "compromised": "The security check could not be completed on this device.",
+      "runtime": "The security check was interrupted."
+    }
+  },
+  "tools": {
+    "crop": "Crop",
+    "color-filter": "Filter",
+    "trim": "Trim",
+    "auto-resize": "Resize",
+    "magic-eraser": "Magic eraser",
+    "lens-blur": "Lens blur",
+    "generative-remove": "Generative remove",
+    "generative-expand": "AI expand",
+    "face-restore": "Face restore",
+    "hd-upscale": "HD enhance",
+    "studio-background": "Studio backdrop",
+    "ai-avatar": "AI avatar",
+    "age-transform": "Age transform",
+    "concept-portrait": "Concept portrait",
+    "auto-captions": "Auto captions",
+    "object-tracking": "Object tracking",
+    "smart-slowmo": "Smart slo-mo",
+    "text-to-video": "Text to video",
+    "smart-template": "Smart template",
+    "manual-reshape": "Manual reshape",
+    "botox-jawline": "Jawline sculpt",
+    "skin-smooth": "Skin smoothing",
+    "blemish-eraser": "Blemish eraser",
+    "even-generate": "Even Girl Generate",
+    "light-sync": "Light match",
+    "cinematic-bokeh": "Cinematic bokeh",
+    "pore-preserve": "Pore detail"
+  },
+  "editor": {
+    "emptyCanvas": "Canvas — pick media to start editing",
+    "selectItem": "Select an item to see its tools",
+    "badge": {
+      "offline": "OFFLINE",
+      "online": "ONLINE",
+      "cooling": "COOLING"
+    },
+    "hint": {
+      "thermalDisabled": "Temporarily unavailable because the device is warm",
+      "networkRequired": "This tool requires an internet connection"
+    },
+    "running": "Running {{tool}}…",
+    "noSourceSelected": "Choose a photo or video first.",
+    "pickerUnavailable": "The media picker is unavailable on this device."
+  },
+  "settings": {
+    "title": "Settings",
+    "feedback": {
+      "title": "Send feedback",
+      "subtitle": "Send us your thoughts, a request, or a complaint — directly.",
+      "category": {
+        "feedback": "Feedback",
+        "request": "Request",
+        "complaint": "Complaint"
+      },
+      "bodyPlaceholder": "Write your message here:",
+      "diagnosticsHeading": "Technical details (for support — feel free to delete):",
+      "noMailApp": "No email app was found on your device. You can write to us at:",
+      "copyHint": "Long-press the address to copy it."
+    },
+    "privacy": {
+      "title": "Privacy",
+      "crashReporting": "Anonymous crash reports",
+      "crashReportingHint": "Contains no personal information — only the code lines where the error happened.",
+      "revokeConsent": "Reset AI consents",
+      "revokeConsentDone": "Consents reset. The relevant tools will ask again next time."
+    },
+    "legal": {
+      "title": "Legal",
+      "terms": "Subscription terms",
+      "privacy": "Privacy policy"
+    },
+    "version": "Version {{version}}",
+    "poweredBy": "Powered by ARMANALABS",
+    "linkFailed": "That link could not be opened on this device."
+  },
+  "nav": {
+    "projects": "Projects",
+    "create": "Create",
+    "storage": "Storage",
+    "settings": "Settings",
+    "feed": "Feed",
+    "leaderboard": "Leaderboard"
+  },
+  "projects": {
+    "empty": "No projects yet",
+    "emptyHint": "Swipe right to create one",
+    "new": "New",
+    "untitled": "Untitled",
+    "versionCount": "{{count}} versions",
+    "original": "Original",
+    "openFailed": "This project could not be opened. It has not been deleted."
+  },
+  "age": {
+    "title": "Verify your age",
+    "subtitle": "EVEN GIRL asks for your birth date to give you an age-appropriate experience. Your birth date never leaves your device.",
+    "day": "Day",
+    "month": "Month",
+    "year": "Year",
+    "confirm": "Continue",
+    "months": [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December"
+    ],
+    "error": {
+      "invalid-date": "Pick a valid date.",
+      "future-date": "Your birth date cannot be in the future.",
+      "implausible-age": "Pick a valid birth year."
+    },
+    "safeMode": {
+      "title": "Safe Mode is on",
+      "body": "Because you are under 18, adult content is hidden and messages from people you do not know are turned off. All editing tools stay available.",
+      "gotIt": "Got it"
+    },
+    "recheck": "Re-verify my age",
+    "privacyNote": "Your birth date is not stored — only whether you are an adult, kept encrypted on your device."
+  },
+  "cloud": {
+    "unavailable": "Cloud backup is not available on this device.",
+    "meteredConfirmRequired": "This backup will use mobile data. Continue?",
+    "zeroDeletionNote": "Your projects in the cloud are never deleted automatically. Only you can delete them.",
+    "conflictTitle": "This project was edited on two devices",
+    "conflictBody": "Choose which version to keep. The other version is not deleted — it is kept as a copy.",
+    "backup": "Back up this project",
+    "backingUp": "Backing up…",
+    "backedUp": "Backed up to your cloud.",
+    "backupFailed": "Backup failed. Your project is unchanged."
+  },
+  "moderation": {
+    "title": "This post",
+    "action": {
+      "report": "Report",
+      "reportHint": "Our team reviews reports and acts within 24 hours.",
+      "block": "Block this person",
+      "blockHint": "You will not see their posts or messages again.",
+      "unblock": "Unblock this person"
+    },
+    "reasonTitle": "Why are you reporting this?",
+    "sentTitle": "Report received",
+    "sentBody": "Our team will review it. Thank you.",
+    "sentSuspended": "The content is hidden until the review is complete.",
+    "report": {
+      "failed": "The report could not be sent. Check your connection and try again.",
+      "ownContent": "You cannot report your own content.",
+      "already": "You already reported this. We are reviewing it."
+    },
+    "reason": {
+      "minor-safety": "A minor appears in this",
+      "nonconsensual-intimate": "Non-consensual intimate image",
+      "sexual-content-unlabeled": "Unlabeled sexual content",
+      "harassment": "Harassment or bullying",
+      "hate-speech": "Hate speech",
+      "violence": "Violence",
+      "impersonation": "Impersonation",
+      "copyright": "Copyright violation",
+      "spam": "Spam",
+      "other": "Other"
+    },
+    "blockedList": {
+      "title": "Blocked accounts",
+      "empty": "You have not blocked anyone",
+      "unblock": "Unblock"
+    },
+    "adultLabel": "18+",
+    "sensitiveLabel": "Sensitive content",
+    "tapToReveal": "Tap to reveal",
+    "blockedNotice": "You blocked this account. Their content is hidden."
+  },
+  "feed": {
+    "empty": "Your feed is empty. Follow a few accounts.",
+    "loadFailed": "The feed could not be loaded. Check your connection."
+  },
+  "leaderboard": {
+    "title": "Weekly Even Leaderboard",
+    "resetsIn": "Resets in {{hours}} hours",
+    "you": "You",
+    "yourRank": "Rank {{rank}} · {{score}} points",
+    "notListed": "{{score}} points",
+    "empty": "Nobody has scored this week yet.",
+    "safeModeNotice": "In Safe Mode your name does not appear on the public list; your score and badge stay visible to you."
+  },
+  "dm": {
+    "unavailable": "Encrypted messaging is not available on this device.",
+    "decryptFailed": "This message could not be decrypted. Refresh the chat.",
+    "reportContextNotice": "This message and the {{count}} messages before it will be sent to moderation with your report. No other messages are sent.",
+    "safetyNumber": "Safety number",
+    "safetyNumberHint": "Compare this number with the other person to confirm the chat is secure.",
+    "sendFailed": "Message could not be sent. Your text is still here — try again.",
+    "placeholder": "Write a message",
+    "send": "Send"
+  },
+  "market": {
+    "title": "Template Market",
+    "loadFailed": "Templates could not be loaded.",
+    "use": "Apply",
+    "proOnly": "PRO",
+    "creatorOnly": "Creator subscribers",
+    "useCount": "Used {{count}} times"
+  },
+  "creator": {
+    "productUnavailable": "This creator subscription is not available right now.",
+    "subscribe": "Subscribe",
+    "subscribed": "Subscribed"
+  },
+  "activity": {
+    "title": "Activity privacy",
+    "lastSeen": "Last seen",
+    "onlineBadge": "Online badge",
+    "ghostMode": "Ghost Mode",
+    "ghostModeHint": "EVEN PRO only. Hides last seen, online badge, typing indicator and read receipts.",
+    "reciprocityNotice": "If you hide your activity, you cannot see other people's activity either. This applies to EVEN PRO members too.",
+    "audience": {
+      "everyone": "Everyone",
+      "mutuals": "Mutual follows",
+      "nobody": "Nobody"
+    },
+    "dmTitle": "Who can message you",
+    "dmAudience": {
+      "everyone": "Everyone",
+      "following": "People I follow",
+      "mutuals": "Mutual follows",
+      "nobody": "Nobody"
+    },
+    "allowRequests": "Allow message requests"
+  },
+  "onboarding": {
+    "title": "EVEN GIRL PRO",
+    "subtitle": "Unlimited generation, watermark-free output, every studio tool.",
+    "continueFree": "Continue without purchasing",
+    "benefits": [
+      "Unlimited AI generation and exports",
+      "Watermark-free, full-resolution output",
+      "24-hour stories and encrypted messaging",
+      "Ghost Mode and the exclusive garland badge",
+      "Ad-free, completely clean experience"
+    ]
+  },
+  "generate": {
+    "title": "Even Girl Generate",
+    "conceptHint": "Sum up your concept in 3-5 words",
+    "conceptPlaceholder": "e.g. cyberpunk streets, neon lights",
+    "referenceHint": "Upload 5 reference photos",
+    "generate": "Generate",
+    "error": {
+      "too-few-references": "5 reference photos are required.",
+      "too-many-references": "You can upload at most 5 reference photos.",
+      "too-few-words": "The concept needs at least 3 words.",
+      "too-many-words": "The concept can be at most 5 words.",
+      "empty-concept": "Write a concept."
+    },
+    "opensDedicatedFlow": "Even Girl Generate opens in its own screen."
+  },
+  "export": {
+    "freeRightUsed": "You have used your free download.",
+    "freeRightRemaining": "You have {{count}} free download left.",
+    "captureBlocked": "Screenshots and screen recording require PRO.",
+    "upgradeToExport": "Upgrade to PRO to keep downloading.",
+    "saved": "Saved to your gallery.",
+    "capture": {
+      "recordingBlocked": "Screen recording is on, so the preview is hidden.",
+      "screenshotNotice": "You have used your free download. Subscribe to save without a watermark.",
+      "gateTitle": "Preview hidden",
+      "gateBody": "Your free download has been used. EVEN GIRL Pro saves without a watermark and without limits.",
+      "gateAction": "See EVEN GIRL Pro"
+    },
+    "save": "Save to gallery",
+    "saving": "Saving…",
+    "failed": "Could not save. Your project is unchanged.",
+    "permissionDenied": "Permission to add to your gallery was not granted.",
+    "saveUnsupported": "Saving to the gallery is not available on this Android version. Use Share instead.",
+    "saverUnavailable": "Saving is unavailable on this device."
+  },
+  "studio": {
+    "manualTitle": "Manual & Botox Studio",
+    "manualSubtitle": "Free and unlimited. No forced brushing — you have full control.",
+    "region": {
+      "jawline": "Jawline",
+      "cheek": "Cheek",
+      "nose": "Nose",
+      "eyes": "Eyes",
+      "lips": "Lips",
+      "chin": "Chin",
+      "waist": "Waist",
+      "hips": "Hips",
+      "legs": "Legs",
+      "shoulders": "Shoulders"
+    },
+    "botox": "Botox effect",
+    "smooth": "Skin smoothing",
+    "preservePores": "Preserve pores",
+    "blemish": "Blemish eraser",
+    "modeManual": "Manual",
+    "modeGenerate": "AI Generate"
+  },
+  "share": {
+    "title": "Share",
+    "instagram": "Instagram Stories",
+    "whatsapp": "WhatsApp Status",
+    "system": "Other apps",
+    "failed": "Sharing could not be completed.",
+    "notInstalled": "That app is not installed on your device."
+  },
+  "reward": {
+    "push": {
+      "title": "Your weekly reward is ready",
+      "body": "You finished at rank {{rank}} — your {{days}}-day free PRO code is ready."
+    },
+    "pendingTitle": "You have a reward waiting",
+    "pendingBody": "You can redeem your {{days}}-day free PRO code through the store.",
+    "redeem": "Redeem code",
+    "redeemFailed": "The redemption page could not be opened. Please try again.",
+    "expiresIn": "Expires in {{days}} days",
+    "storeNote": "The code is redeemed on the store's own page. Your subscription appears in your store account and you can cancel it any time.",
+    "available": "Rank {{rank}} — {{days}} days of free PRO"
+  },
+  "profile": {
+    "postCount": "{{count}} posts",
+    "empty": "No posts shared yet."
+  },
+  "story": {
+    "expired": "This story has expired.",
+    "remainingHours": "{{count}}h left",
+    "previous": "Previous story",
+    "next": "Next story"
+  },
+  "models": {
+    "meteredConfirmRequired": "This tool needs a one-time download over mobile data. Continue?"
+  }
+}

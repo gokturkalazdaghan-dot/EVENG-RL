@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Uyarlanabilir simge (API 26+). Launcher maskeyi kendisi uygular; bu
+  yüzden ön plan güvenli alanın (66dp/108dp) içinde kalır — dışına taşan
+  bir işaret yuvarlak maskede kırpılır.
+-->
+<adaptive-icon xmlns:android="http://schemas.android.com/apk/res/android">
+    <background android:drawable="@color/ic_launcher_background" />
+    <foreground android:drawable="@drawable/ic_launcher_foreground" />
+    <monochrome android:drawable="@drawable/ic_launcher_foreground" />
+</adaptive-icon>

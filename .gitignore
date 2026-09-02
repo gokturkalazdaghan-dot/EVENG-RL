@@ -1,0 +1,41 @@
+# Bağımlılıklar
+node_modules/
+client_mobile/node_modules/
+
+# JS / RN
+*.log
+npm-debug.log*
+yarn-error.log*
+.metro-health-check*
+client_mobile/.expo/
+
+# iOS
+client_mobile/ios/Pods/
+client_mobile/ios/build/
+client_mobile/ios/*.xcworkspace/xcuserdata/
+client_mobile/ios/DerivedData/
+# Karartma sembol haritası — çökme raporlarını çözmek için ŞARTTIR ama
+# repoda durmaz: sızarsa karartmanın tüm değeri kaybolur. Sürüm arşivine
+# (güvenli depoya) yüklenir.
+client_mobile/ios/swiftshield-output/
+symbol-map-*.txt
+
+# Android
+client_mobile/android/.gradle/
+client_mobile/android/build/
+client_mobile/android/app/build/
+client_mobile/android/local.properties
+*.keystore
+!debug.keystore
+# R8 mapping dosyası: aynı gerekçeyle repoda durmaz, Play Console'a yüklenir.
+mapping.txt
+
+# Ortam / gizli değerler
+.env
+.env.local
+*.p8
+*.p12
+google-play-service-account.json
+
+# İşletim sistemi
+.DS_Store

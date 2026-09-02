@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Uygulama adı BURADA tanımlıdır ve AndroidManifest.xml bunu @string/app_name
+  ile kullanır. Manifest'e doğrudan yazmak, adın yerelleştirilmesini imkânsız
+  kılar (values-tr/, values-ar/ gibi klasörlerle dile göre değiştirilebilir).
+
+  NOT: Marka adı çevrilmez — "EVEN GIRL" her dilde aynıdır. Bu dosyanın varlığı,
+  ileride ada bir alt başlık eklenmek istenirse gereken yeri hazır tutar.
+-->
+<resources>
+    <string name="app_name">EVEN GIRL</string>
+</resources>

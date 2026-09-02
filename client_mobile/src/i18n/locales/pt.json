@@ -1,0 +1,417 @@
+{
+  "common": {
+    "retry": "Tentar novamente",
+    "cancel": "Cancelar",
+    "close": "Fechar",
+    "continue": "Continuar",
+    "back": "Voltar",
+    "loading": "Processando…"
+  },
+  "paywall": {
+    "title": "EVEN GIRL Pro",
+    "subtitle": "Todas as ferramentas de IA, sem anúncios.",
+    "period": {
+      "week": "por semana",
+      "month": "por mês",
+      "year": "por ano"
+    },
+    "perWeek": "{{price}} por semana",
+    "savings": "Economize {{percent}}%",
+    "bestValue": "Melhor valor",
+    "freeTrialBadge": "{{count}} dia grátis",
+    "cta": {
+      "startTrial": "Testar {{count}} dia grátis",
+      "subscribe": "Iniciar assinatura"
+    },
+    "disclosure": {
+      "trial": "Após o seu teste gratuito de {{trialDays}} dia, será cobrado {{price}} e a assinatura será renovada automaticamente. Cancele pelo menos 24 horas antes do fim do teste para evitar a cobrança. Você pode cancelar quando quiser nas configurações da loja.",
+      "standard": "Será cobrado {{price}} e a assinatura será renovada automaticamente. Você pode cancelar quando quiser nas configurações da loja."
+    },
+    "restore": "Restaurar compras",
+    "restored": "Sua assinatura foi restaurada.",
+    "nothingToRestore": "Nenhuma assinatura foi encontrada para restaurar nesta conta.",
+    "terms": "Termos da assinatura",
+    "privacy": "Política de privacidade",
+    "manage": "Gerenciar assinatura",
+    "requiredForFeature": "Esta ferramenta requer o EVEN GIRL Pro.",
+    "billingIssue": "Há um problema com sua forma de pagamento. Atualize nas configurações da loja para manter o acesso.",
+    "error": {
+      "productsUnavailable": "Não foi possível carregar as opções de assinatura. Verifique sua conexão e tente novamente.",
+      "purchaseFailed": "Não foi possível concluir a compra. Nada foi cobrado.",
+      "restoreFailed": "Não foi possível concluir a restauração. Tente novamente."
+    }
+  },
+  "ethics": {
+    "consentRequired": "Você precisa aceitar os termos para continuar.",
+    "generalTitle": "Sobre IA generativa",
+    "generalBody": "Estas ferramentas geram conteúdo com IA. Você é responsável por garantir que o que criar respeite os direitos autorais e a lei. Não use obras de terceiros sem permissão.",
+    "faceTitle": "Sobre imagens de rostos",
+    "faceBody": "Use as ferramentas de edição facial apenas nas suas próprias fotos ou em fotos de pessoas que deram permissão explícita. Usar o rosto de alguém sem consentimento ou criar conteúdo enganoso é ilegal.",
+    "accept": "Entendi e aceito",
+    "decline": "Não aceito"
+  },
+  "storage": {
+    "title": "Armazenamento",
+    "usedOfLimit": "{{percent}}% do limite de {{limit}}",
+    "renderCache": "Arquivos temporários de renderização",
+    "thumbnails": "Pré-visualizações",
+    "models": "Modelos de IA offline",
+    "clearTemporary": "Limpar arquivos temporários",
+    "clearModels": "Excluir também os modelos offline",
+    "clearModelsHint": "Se você excluir os modelos, as ferramentas offline só voltarão a funcionar após novo download."
+  },
+  "errors": {
+    "NETWORK_UNAVAILABLE": "Sem conexão com a internet.",
+    "offlineFeatureUnavailable": "Esta ferramenta requer conexão com a internet.",
+    "deviceTooWeak": "Esta tarefa é pesada demais para o seu aparelho. Ela pode ser executada no servidor quando você estiver online.",
+    "MODEL_UNAVAILABLE": "Esta ferramenta está indisponível no momento.",
+    "THERMAL_THROTTLED": "Seu aparelho está aquecido. Vai terminar mais rápido depois que esfriar.",
+    "CACHE_WRITE_FAILED": "Espaço insuficiente no aparelho.",
+    "UNKNOWN": "Algo deu errado."
+  },
+  "security": {
+    "blocked": {
+      "generic": "Não foi possível verificar um ambiente seguro.",
+      "compromised": "A verificação de segurança não pôde ser concluída neste aparelho.",
+      "runtime": "A verificação de segurança foi interrompida."
+    }
+  },
+  "tools": {
+    "crop": "Recortar",
+    "color-filter": "Filtro",
+    "trim": "Cortar",
+    "auto-resize": "Redimensionar",
+    "magic-eraser": "Borracha mágica",
+    "lens-blur": "Desfoque de lente",
+    "generative-remove": "Remoção generativa",
+    "generative-expand": "Expandir com IA",
+    "face-restore": "Restaurar rosto",
+    "hd-upscale": "Melhoria HD",
+    "studio-background": "Fundo de estúdio",
+    "ai-avatar": "Avatar de IA",
+    "age-transform": "Transformação de idade",
+    "concept-portrait": "Retrato conceitual",
+    "auto-captions": "Legendas automáticas",
+    "object-tracking": "Rastreamento de objeto",
+    "smart-slowmo": "Câmera lenta inteligente",
+    "text-to-video": "Texto para vídeo",
+    "smart-template": "Modelo inteligente",
+    "manual-reshape": "Remodelar",
+    "botox-jawline": "Linha do maxilar",
+    "skin-smooth": "Suavizar pele",
+    "blemish-eraser": "Apagar imperfeições",
+    "even-generate": "Even Girl Generate",
+    "light-sync": "Ajuste de luz",
+    "cinematic-bokeh": "Bokeh cinematográfico",
+    "pore-preserve": "Detalhe dos poros"
+  },
+  "editor": {
+    "emptyCanvas": "Tela — escolha uma mídia para começar",
+    "selectItem": "Selecione um item para ver as ferramentas",
+    "badge": {
+      "offline": "OFFLINE",
+      "online": "ONLINE",
+      "cooling": "ESFRIANDO"
+    },
+    "hint": {
+      "thermalDisabled": "Temporariamente indisponível porque o aparelho está aquecido",
+      "networkRequired": "Esta ferramenta requer conexão com a internet"
+    },
+    "running": "Executando {{tool}}…",
+    "noSourceSelected": "Escolha primeiro uma foto ou vídeo.",
+    "pickerUnavailable": "O seletor de mídia não está disponível neste dispositivo."
+  },
+  "settings": {
+    "title": "Configurações",
+    "feedback": {
+      "title": "Enviar feedback",
+      "subtitle": "Envie sua opinião, um pedido ou uma reclamação — direto para nós.",
+      "category": {
+        "feedback": "Feedback",
+        "request": "Pedido",
+        "complaint": "Reclamação"
+      },
+      "bodyPlaceholder": "Escreva sua mensagem aqui:",
+      "diagnosticsHeading": "Dados técnicos (para suporte — pode apagar se quiser):",
+      "noMailApp": "Nenhum app de e-mail foi encontrado no seu aparelho. Você pode nos escrever em:",
+      "copyHint": "Toque e segure no endereço para copiar."
+    },
+    "privacy": {
+      "title": "Privacidade",
+      "crashReporting": "Relatórios de falhas anônimos",
+      "crashReportingHint": "Não contém informações pessoais — apenas as linhas de código onde o erro ocorreu.",
+      "revokeConsent": "Redefinir consentimentos de IA",
+      "revokeConsentDone": "Consentimentos redefinidos. As ferramentas perguntarão novamente na próxima vez."
+    },
+    "legal": {
+      "title": "Jurídico",
+      "terms": "Termos da assinatura",
+      "privacy": "Política de privacidade"
+    },
+    "version": "Versão {{version}}",
+    "poweredBy": "Powered by ARMANALABS",
+    "linkFailed": "Não foi possível abrir esse link neste dispositivo."
+  },
+  "nav": {
+    "projects": "Projetos",
+    "create": "Criar",
+    "storage": "Armazenamento",
+    "settings": "Configurações",
+    "feed": "Feed",
+    "leaderboard": "Ranking"
+  },
+  "projects": {
+    "empty": "Nenhum projeto ainda",
+    "emptyHint": "Deslize para a direita para criar",
+    "new": "Novo",
+    "untitled": "Sem título",
+    "versionCount": "{{count}} versões",
+    "original": "Original",
+    "openFailed": "Não foi possível abrir este projeto. Ele não foi excluído."
+  },
+  "age": {
+    "title": "Confirme sua idade",
+    "subtitle": "O EVEN GIRL pede sua data de nascimento para oferecer uma experiência adequada à sua idade. Ela nunca sai do seu aparelho.",
+    "day": "Dia",
+    "month": "Mês",
+    "year": "Ano",
+    "confirm": "Continuar",
+    "months": [
+      "Janeiro",
+      "Fevereiro",
+      "Março",
+      "Abril",
+      "Maio",
+      "Junho",
+      "Julho",
+      "Agosto",
+      "Setembro",
+      "Outubro",
+      "Novembro",
+      "Dezembro"
+    ],
+    "error": {
+      "invalid-date": "Escolha uma data válida.",
+      "future-date": "A data de nascimento não pode ser no futuro.",
+      "implausible-age": "Escolha um ano de nascimento válido."
+    },
+    "safeMode": {
+      "title": "Safe Mode ativado",
+      "body": "Como você tem menos de 18 anos, o conteúdo adulto está oculto e mensagens de desconhecidos estão desativadas. Todas as ferramentas de edição continuam disponíveis.",
+      "gotIt": "Entendi"
+    },
+    "recheck": "Confirmar minha idade novamente",
+    "privacyNote": "Sua data de nascimento não é armazenada — apenas se você é maior de idade, criptografado no seu aparelho."
+  },
+  "cloud": {
+    "unavailable": "O backup na nuvem não está disponível neste aparelho.",
+    "meteredConfirmRequired": "Este backup vai usar dados móveis. Continuar?",
+    "zeroDeletionNote": "Seus projetos na nuvem nunca são excluídos automaticamente. Só você pode excluí-los.",
+    "conflictTitle": "Este projeto foi editado em dois aparelhos",
+    "conflictBody": "Escolha qual versão manter. A outra não é excluída — fica guardada como cópia.",
+    "backup": "Fazer backup deste projeto",
+    "backingUp": "Fazendo backup…",
+    "backedUp": "Backup feito na sua nuvem.",
+    "backupFailed": "O backup falhou. Seu projeto continua intacto."
+  },
+  "moderation": {
+    "title": "Esta publicação",
+    "action": {
+      "report": "Denunciar",
+      "reportHint": "Nossa equipe analisa denúncias e age em até 24 horas.",
+      "block": "Bloquear esta pessoa",
+      "blockHint": "Você não verá mais as publicações nem as mensagens dela.",
+      "unblock": "Desbloquear esta pessoa"
+    },
+    "reasonTitle": "Por que você está denunciando?",
+    "sentTitle": "Denúncia recebida",
+    "sentBody": "Nossa equipe vai analisar. Obrigado.",
+    "sentSuspended": "O conteúdo fica oculto até a análise terminar.",
+    "report": {
+      "failed": "Não foi possível enviar a denúncia. Verifique sua conexão e tente novamente.",
+      "ownContent": "Você não pode denunciar o seu próprio conteúdo.",
+      "already": "Você já denunciou isto. Estamos analisando."
+    },
+    "reason": {
+      "minor-safety": "Aparece uma pessoa menor de idade",
+      "nonconsensual-intimate": "Imagem íntima sem consentimento",
+      "sexual-content-unlabeled": "Conteúdo sexual sem rótulo",
+      "harassment": "Assédio ou bullying",
+      "hate-speech": "Discurso de ódio",
+      "violence": "Violência",
+      "impersonation": "Falsidade ideológica",
+      "copyright": "Violação de direitos autorais",
+      "spam": "Spam",
+      "other": "Outro"
+    },
+    "blockedList": {
+      "title": "Contas bloqueadas",
+      "empty": "Você não bloqueou ninguém",
+      "unblock": "Desbloquear"
+    },
+    "adultLabel": "18+",
+    "sensitiveLabel": "Conteúdo sensível",
+    "tapToReveal": "Toque para ver",
+    "blockedNotice": "Você bloqueou esta conta. O conteúdo dela está oculto."
+  },
+  "feed": {
+    "empty": "Seu feed está vazio. Siga algumas contas.",
+    "loadFailed": "Não foi possível carregar o feed. Verifique sua conexão."
+  },
+  "leaderboard": {
+    "title": "Ranking semanal Even",
+    "resetsIn": "Reinicia em {{hours}} horas",
+    "you": "Você",
+    "yourRank": "{{rank}}º · {{score}} pontos",
+    "notListed": "{{score}} pontos",
+    "empty": "Ninguém pontuou esta semana ainda.",
+    "safeModeNotice": "No Safe Mode seu nome não aparece na lista pública; sua pontuação e seu selo continuam visíveis para você."
+  },
+  "dm": {
+    "unavailable": "As mensagens criptografadas não estão disponíveis neste aparelho.",
+    "decryptFailed": "Não foi possível descriptografar esta mensagem. Atualize a conversa.",
+    "reportContextNotice": "Esta mensagem e as {{count}} anteriores serão enviadas à moderação com sua denúncia. Nenhuma outra mensagem é enviada.",
+    "safetyNumber": "Número de segurança",
+    "safetyNumberHint": "Compare este número com a outra pessoa para confirmar que a conversa é segura.",
+    "sendFailed": "Não foi possível enviar a mensagem. Seu texto continua aqui — tente novamente.",
+    "placeholder": "Escreva uma mensagem",
+    "send": "Enviar"
+  },
+  "market": {
+    "title": "Mercado de modelos",
+    "loadFailed": "Não foi possível carregar os modelos.",
+    "use": "Aplicar",
+    "proOnly": "PRO",
+    "creatorOnly": "Assinantes do criador",
+    "useCount": "Usado {{count}} vezes"
+  },
+  "creator": {
+    "productUnavailable": "Esta assinatura de criador não está disponível agora.",
+    "subscribe": "Assinar",
+    "subscribed": "Assinante"
+  },
+  "activity": {
+    "title": "Privacidade de atividade",
+    "lastSeen": "Visto por último",
+    "onlineBadge": "Selo online",
+    "ghostMode": "Ghost Mode",
+    "ghostModeHint": "Exclusivo EVEN PRO. Oculta visto por último, selo online, indicador de digitação e confirmações de leitura.",
+    "reciprocityNotice": "Se você ocultar sua atividade, também não verá a atividade dos outros. Isso vale também para membros EVEN PRO.",
+    "audience": {
+      "everyone": "Todos",
+      "mutuals": "Seguidores mútuos",
+      "nobody": "Ninguém"
+    },
+    "dmTitle": "Quem pode te mandar mensagem",
+    "dmAudience": {
+      "everyone": "Todos",
+      "following": "Pessoas que eu sigo",
+      "mutuals": "Seguidores mútuos",
+      "nobody": "Ninguém"
+    },
+    "allowRequests": "Permitir pedidos de mensagem"
+  },
+  "onboarding": {
+    "title": "EVEN GIRL PRO",
+    "subtitle": "Geração ilimitada, saída sem marca d'água, todas as ferramentas do estúdio.",
+    "continueFree": "Continuar sem comprar",
+    "benefits": [
+      "Geração e exportações de IA ilimitadas",
+      "Saída sem marca d'água em resolução total",
+      "Stories de 24 horas e mensagens criptografadas",
+      "Ghost Mode e o selo de guirlanda exclusivo",
+      "Sem anúncios, experiência totalmente limpa"
+    ]
+  },
+  "generate": {
+    "title": "Even Girl Generate",
+    "conceptHint": "Resuma seu conceito em 3-5 palavras",
+    "conceptPlaceholder": "ex. ruas cyberpunk, luzes neon",
+    "referenceHint": "Envie 5 fotos de referência",
+    "generate": "Gerar",
+    "error": {
+      "too-few-references": "São necessárias 5 fotos de referência.",
+      "too-many-references": "Você pode enviar no máximo 5 fotos de referência.",
+      "too-few-words": "O conceito precisa de pelo menos 3 palavras.",
+      "too-many-words": "O conceito pode ter no máximo 5 palavras.",
+      "empty-concept": "Escreva um conceito."
+    },
+    "opensDedicatedFlow": "O Even Girl Generate abre na sua própria tela."
+  },
+  "export": {
+    "freeRightUsed": "Você usou seu download gratuito.",
+    "freeRightRemaining": "Resta {{count}} download gratuito.",
+    "captureBlocked": "Capturas e gravações de tela exigem PRO.",
+    "upgradeToExport": "Assine o PRO para continuar baixando.",
+    "saved": "Salvo na sua galeria.",
+    "capture": {
+      "recordingBlocked": "A gravação de tela está ativa, por isso a pré-visualização está oculta.",
+      "screenshotNotice": "Você usou seu download gratuito. Assine para salvar sem marca d’água.",
+      "gateTitle": "Pré-visualização oculta",
+      "gateBody": "Seu download gratuito foi usado. O EVEN GIRL Pro salva sem marca d’água e sem limites.",
+      "gateAction": "Ver o EVEN GIRL Pro"
+    },
+    "save": "Salvar na galeria",
+    "saving": "Salvando…",
+    "failed": "Não foi possível salvar. Seu projeto continua intacto.",
+    "permissionDenied": "A permissão para adicionar à sua galeria não foi concedida.",
+    "saveUnsupported": "Salvar na galeria não está disponível nesta versão do Android. Use Compartilhar.",
+    "saverUnavailable": "Salvar não está disponível neste dispositivo."
+  },
+  "studio": {
+    "manualTitle": "Estúdio Manual e Botox",
+    "manualSubtitle": "Grátis e ilimitado. Sem pincel obrigatório — o controle é todo seu.",
+    "region": {
+      "jawline": "Linha do queixo",
+      "cheek": "Maçã do rosto",
+      "nose": "Nariz",
+      "eyes": "Olhos",
+      "lips": "Lábios",
+      "chin": "Queixo",
+      "waist": "Cintura",
+      "hips": "Quadril",
+      "legs": "Pernas",
+      "shoulders": "Ombros"
+    },
+    "botox": "Efeito botox",
+    "smooth": "Suavização de pele",
+    "preservePores": "Preservar poros",
+    "blemish": "Apagador de manchas",
+    "modeManual": "Manual",
+    "modeGenerate": "AI Generate"
+  },
+  "share": {
+    "title": "Compartilhar",
+    "instagram": "Stories do Instagram",
+    "whatsapp": "Status do WhatsApp",
+    "system": "Outros apps",
+    "failed": "Não foi possível concluir o compartilhamento.",
+    "notInstalled": "Esse app não está instalado no seu aparelho."
+  },
+  "reward": {
+    "push": {
+      "title": "Sua recompensa semanal está pronta",
+      "body": "Você terminou em {{rank}}º — seu código PRO grátis de {{days}} dias está pronto."
+    },
+    "pendingTitle": "Você tem uma recompensa esperando",
+    "pendingBody": "Você pode resgatar seu código PRO grátis de {{days}} dias pela loja.",
+    "redeem": "Resgatar código",
+    "redeemFailed": "Não foi possível abrir a página de resgate. Tente novamente.",
+    "expiresIn": "Expira em {{days}} dias",
+    "storeNote": "O código é resgatado na própria página da loja. Sua assinatura aparece na sua conta da loja e você pode cancelar quando quiser.",
+    "available": "Posição {{rank}} — {{days}} dias de PRO grátis"
+  },
+  "profile": {
+    "postCount": "{{count}} publicações",
+    "empty": "Nenhuma publicação ainda."
+  },
+  "story": {
+    "expired": "Este story expirou.",
+    "remainingHours": "Faltam {{count}} h",
+    "previous": "Story anterior",
+    "next": "Próximo story"
+  },
+  "models": {
+    "meteredConfirmRequired": "Esta ferramenta precisa de um download único usando dados móveis. Continuar?"
+  }
+}

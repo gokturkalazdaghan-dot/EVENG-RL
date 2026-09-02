@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Açılış zemini. Değerler src/ui/theme/tokens.ts ile aynı tutulmalıdır. -->
+<resources>
+    <color name="window_background">#EDEFF1</color>
+    <!-- Başlatıcı simgesi arka planı — imza rengi. -->
+    <color name="ic_launcher_background">#0E5F73</color>
+</resources>

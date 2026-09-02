@@ -1,0 +1,417 @@
+{
+  "common": {
+    "retry": "Yeniden dene",
+    "cancel": "Vazgeç",
+    "close": "Kapat",
+    "continue": "Devam et",
+    "back": "Geri",
+    "loading": "İşleniyor…"
+  },
+  "paywall": {
+    "title": "EVEN GIRL Pro",
+    "subtitle": "Tüm yapay zeka araçları, reklamsız.",
+    "period": {
+      "week": "haftada",
+      "month": "ayda",
+      "year": "yılda"
+    },
+    "perWeek": "haftada {{price}}",
+    "savings": "%{{percent}} tasarruf",
+    "bestValue": "En avantajlı",
+    "freeTrialBadge": "{{count}} gün ücretsiz",
+    "cta": {
+      "startTrial": "{{count}} gün ücretsiz dene",
+      "subscribe": "Aboneliği başlat"
+    },
+    "disclosure": {
+      "trial": "{{trialDays}} günlük ücretsiz deneme sonrasında {{price}} tahsil edilir ve abonelik otomatik yenilenir. Deneme bitmeden en az 24 saat önce iptal ederseniz ücret alınmaz. İstediğiniz zaman mağaza ayarlarından iptal edebilirsiniz.",
+      "standard": "{{price}} tahsil edilir ve abonelik otomatik olarak yenilenir. İstediğiniz zaman mağaza ayarlarından iptal edebilirsiniz."
+    },
+    "restore": "Satın alımları geri yükle",
+    "restored": "Aboneliğiniz geri yüklendi.",
+    "nothingToRestore": "Bu hesapta geri yüklenecek abonelik bulunamadı.",
+    "terms": "Abonelik koşulları",
+    "privacy": "Gizlilik politikası",
+    "manage": "Aboneliği yönet",
+    "requiredForFeature": "Bu araç EVEN GIRL Pro gerektiriyor.",
+    "billingIssue": "Ödeme yönteminizde bir sorun var. Erişiminizin kesilmemesi için mağaza ayarlarından güncelleyin.",
+    "error": {
+      "productsUnavailable": "Abonelik seçenekleri şu anda yüklenemedi. Bağlantınızı kontrol edip tekrar deneyin.",
+      "purchaseFailed": "Satın alma tamamlanamadı. Hesabınızdan ücret alınmadı.",
+      "restoreFailed": "Geri yükleme tamamlanamadı. Lütfen tekrar deneyin."
+    }
+  },
+  "ethics": {
+    "consentRequired": "Devam etmek için kullanım koşullarını onaylamanız gerekiyor.",
+    "generalTitle": "Üretken yapay zeka hakkında",
+    "generalBody": "Bu araçlar yapay zeka ile içerik üretir. Ürettiğiniz içeriğin telif haklarına ve yasalara uygunluğundan siz sorumlusunuz. Başkalarına ait eserleri izinsiz kullanmayın.",
+    "faceTitle": "Yüz görüntüleri hakkında",
+    "faceBody": "Yüz düzenleme araçlarını yalnızca kendi fotoğraflarınızda veya açık izin aldığınız kişilerin fotoğraflarında kullanın. İzinsiz yüz kullanımı ve yanıltıcı içerik üretimi yasalara aykırıdır.",
+    "accept": "Anladım ve kabul ediyorum",
+    "decline": "Kabul etmiyorum"
+  },
+  "storage": {
+    "title": "Depolama",
+    "usedOfLimit": "{{limit}} sınırın %{{percent}}'i",
+    "renderCache": "Geçici render dosyaları",
+    "thumbnails": "Önizlemeler",
+    "models": "Çevrimdışı AI modelleri",
+    "clearTemporary": "Geçici dosyaları temizle",
+    "clearModels": "Çevrimdışı modelleri de sil",
+    "clearModelsHint": "Modelleri silerseniz çevrimdışı araçlar yeniden indirilene kadar çalışmaz."
+  },
+  "errors": {
+    "NETWORK_UNAVAILABLE": "İnternet bağlantısı yok.",
+    "offlineFeatureUnavailable": "Bu araç internet bağlantısı gerektiriyor.",
+    "deviceTooWeak": "Bu işlem cihazınız için fazla ağır. Bağlantı kurulduğunda sunucuda çalıştırılabilir.",
+    "MODEL_UNAVAILABLE": "Araç şu anda kullanılamıyor.",
+    "THERMAL_THROTTLED": "Cihazınız ısındı. İşlem, cihaz soğuduğunda daha hızlı tamamlanacak.",
+    "CACHE_WRITE_FAILED": "Cihazda yeterli alan yok.",
+    "UNKNOWN": "Beklenmeyen bir hata oluştu."
+  },
+  "security": {
+    "blocked": {
+      "generic": "Güvenli ortam doğrulanamadı.",
+      "compromised": "Bu cihazda güvenlik kontrolü tamamlanamadı.",
+      "runtime": "Güvenlik kontrolü kesintiye uğradı."
+    }
+  },
+  "tools": {
+    "crop": "Kırp",
+    "color-filter": "Filtre",
+    "trim": "Kes",
+    "auto-resize": "Boyutlandır",
+    "magic-eraser": "Sihirli silgi",
+    "lens-blur": "Lens bulanıklığı",
+    "generative-remove": "Üretken kaldır",
+    "generative-expand": "AI genişlet",
+    "face-restore": "Yüz onarımı",
+    "hd-upscale": "HD netleştir",
+    "studio-background": "Stüdyo arka plan",
+    "ai-avatar": "AI avatar",
+    "age-transform": "Yaş dönüşümü",
+    "concept-portrait": "Konsept portre",
+    "auto-captions": "Otomatik altyazı",
+    "object-tracking": "Nesne takibi",
+    "smart-slowmo": "Akıllı ağır çekim",
+    "text-to-video": "Metinden video",
+    "smart-template": "Akıllı şablon",
+    "manual-reshape": "Manuel şekillendir",
+    "botox-jawline": "Çene hattı",
+    "skin-smooth": "Cilt yumuşatma",
+    "blemish-eraser": "Leke silgisi",
+    "even-generate": "Even Girl Generate",
+    "light-sync": "Işık uyumu",
+    "cinematic-bokeh": "Sinematik bokeh",
+    "pore-preserve": "Gözenek detayı"
+  },
+  "editor": {
+    "emptyCanvas": "Tuval — düzenlemek için medya seçin",
+    "selectItem": "Araçları görmek için bir öğe seçin",
+    "badge": {
+      "offline": "ÇEVRİMDIŞI",
+      "online": "ÇEVRİMİÇİ",
+      "cooling": "SOĞUMA"
+    },
+    "hint": {
+      "thermalDisabled": "Cihaz ısındığı için geçici olarak kullanılamıyor",
+      "networkRequired": "Bu araç internet bağlantısı gerektiriyor"
+    },
+    "running": "{{tool}} çalışıyor…",
+    "noSourceSelected": "Önce bir fotoğraf veya video seç.",
+    "pickerUnavailable": "Medya seçici bu cihazda kullanılamıyor."
+  },
+  "settings": {
+    "title": "Ayarlar",
+    "feedback": {
+      "title": "Geri bildirim gönder",
+      "subtitle": "Görüşünüzü, isteğinizi veya şikayetinizi doğrudan bize iletin.",
+      "category": {
+        "feedback": "Geri bildirim",
+        "request": "İstek",
+        "complaint": "Şikayet"
+      },
+      "bodyPlaceholder": "Mesajınızı buraya yazın:",
+      "diagnosticsHeading": "Teknik bilgiler (destek için — dilerseniz silebilirsiniz):",
+      "noMailApp": "Cihazınızda e-posta uygulaması bulunamadı. Bize şu adresten yazabilirsiniz:",
+      "copyHint": "Adrese uzun basarak kopyalayabilirsiniz."
+    },
+    "privacy": {
+      "title": "Gizlilik",
+      "crashReporting": "Anonim çökme raporları",
+      "crashReportingHint": "Kişisel hiçbir bilgi içermez; yalnızca hatanın oluştuğu kod satırlarını gönderir.",
+      "revokeConsent": "Yapay zeka onaylarını sıfırla",
+      "revokeConsentDone": "Onaylar sıfırlandı. İlgili araçlar bir sonraki kullanımda tekrar soracak."
+    },
+    "legal": {
+      "title": "Yasal",
+      "terms": "Abonelik koşulları",
+      "privacy": "Gizlilik politikası"
+    },
+    "version": "Sürüm {{version}}",
+    "poweredBy": "Powered by ARMANALABS",
+    "linkFailed": "Bu bağlantı cihazında açılamadı."
+  },
+  "nav": {
+    "projects": "Projeler",
+    "create": "Oluştur",
+    "storage": "Depolama",
+    "settings": "Ayarlar",
+    "feed": "Akış",
+    "leaderboard": "Sıralama"
+  },
+  "projects": {
+    "empty": "Henüz proje yok",
+    "emptyHint": "Oluşturmak için sağa kaydırın",
+    "new": "Yeni",
+    "untitled": "Adsız",
+    "versionCount": "{{count}} sürüm",
+    "original": "Orijinal",
+    "openFailed": "Bu proje açılamadı. Silinmedi, yerinde duruyor."
+  },
+  "age": {
+    "title": "Yaşınızı doğrulayın",
+    "subtitle": "EVEN GIRL, yaşınıza uygun bir deneyim sunmak için doğum tarihinizi sorar. Doğum tarihiniz cihazınızdan çıkmaz.",
+    "day": "Gün",
+    "month": "Ay",
+    "year": "Yıl",
+    "confirm": "Devam et",
+    "months": [
+      "Ocak",
+      "Şubat",
+      "Mart",
+      "Nisan",
+      "Mayıs",
+      "Haziran",
+      "Temmuz",
+      "Ağustos",
+      "Eylül",
+      "Ekim",
+      "Kasım",
+      "Aralık"
+    ],
+    "error": {
+      "invalid-date": "Geçerli bir tarih seçin.",
+      "future-date": "Doğum tarihi gelecekte olamaz.",
+      "implausible-age": "Geçerli bir doğum yılı seçin."
+    },
+    "safeMode": {
+      "title": "Safe Mode açık",
+      "body": "18 yaşından küçük olduğunuz için yetişkin içerik gizlendi ve tanımadığınız kişilerden mesaj almanız kapatıldı. Tüm düzenleme araçları açık.",
+      "gotIt": "Anladım"
+    },
+    "recheck": "Yaşımı yeniden doğrula",
+    "privacyNote": "Doğum tarihiniz saklanmaz; yalnızca yetişkin olup olmadığınız bilgisi cihazınızda şifreli olarak tutulur."
+  },
+  "cloud": {
+    "unavailable": "Bulut yedekleme bu cihazda kullanılamıyor.",
+    "meteredConfirmRequired": "Bu yedekleme mobil veri kullanacak. Devam etmek istiyor musunuz?",
+    "zeroDeletionNote": "Buluttaki projeleriniz hiçbir koşulda otomatik silinmez. Yalnızca siz silebilirsiniz.",
+    "conflictTitle": "Bu proje iki cihazda düzenlenmiş",
+    "conflictBody": "Hangi sürümü tutmak istediğinizi seçin. Seçmediğiniz sürüm de silinmez, kopya olarak saklanır.",
+    "backup": "Bu projeyi yedekle",
+    "backingUp": "Yedekleniyor…",
+    "backedUp": "Kendi bulutuna yedeklendi.",
+    "backupFailed": "Yedekleme başarısız. Projen olduğu gibi duruyor."
+  },
+  "moderation": {
+    "title": "Bu gönderi",
+    "action": {
+      "report": "Rapor et",
+      "reportHint": "Ekibimiz inceler ve 24 saat içinde işlem yapar.",
+      "block": "Bu kişiyi engelle",
+      "blockHint": "Gönderilerini ve mesajlarını bir daha görmezsiniz.",
+      "unblock": "Engeli kaldır"
+    },
+    "reasonTitle": "Neden rapor ediyorsunuz?",
+    "sentTitle": "Raporunuz alındı",
+    "sentBody": "Ekibimiz inceleyecek. Teşekkür ederiz.",
+    "sentSuspended": "İçerik inceleme tamamlanana kadar gizlendi.",
+    "report": {
+      "failed": "Rapor gönderilemedi. Bağlantınızı kontrol edip tekrar deneyin.",
+      "ownContent": "Kendi içeriğinizi raporlayamazsınız.",
+      "already": "Bunu zaten raporladınız. İnceliyoruz."
+    },
+    "reason": {
+      "minor-safety": "Reşit olmayan biri yer alıyor",
+      "nonconsensual-intimate": "İzinsiz mahrem görüntü",
+      "sexual-content-unlabeled": "Etiketlenmemiş cinsel içerik",
+      "harassment": "Taciz veya zorbalık",
+      "hate-speech": "Nefret söylemi",
+      "violence": "Şiddet",
+      "impersonation": "Sahte hesap / kimliğe bürünme",
+      "copyright": "Telif hakkı ihlali",
+      "spam": "Spam",
+      "other": "Diğer"
+    },
+    "blockedList": {
+      "title": "Engellenen hesaplar",
+      "empty": "Engellediğiniz kimse yok",
+      "unblock": "Engeli kaldır"
+    },
+    "adultLabel": "+18",
+    "sensitiveLabel": "Hassas içerik",
+    "tapToReveal": "Görmek için dokunun",
+    "blockedNotice": "Bu hesabı engellediniz. İçerikleri gizli."
+  },
+  "feed": {
+    "empty": "Akışınız henüz boş. Birkaç hesabı takip edin.",
+    "loadFailed": "Akış yüklenemedi. Bağlantınızı kontrol edin."
+  },
+  "leaderboard": {
+    "title": "Haftalık Even Sıralaması",
+    "resetsIn": "{{hours}} saat sonra sıfırlanır",
+    "you": "Sen",
+    "yourRank": "{{rank}}. sıra · {{score}} puan",
+    "notListed": "{{score}} puan",
+    "empty": "Bu hafta henüz kimse puan toplamadı.",
+    "safeModeNotice": "Safe Mode'da adınız herkese açık listede görünmez; puanınız ve rozetiniz size görünmeye devam eder."
+  },
+  "dm": {
+    "unavailable": "Şifreli mesajlaşma bu cihazda kullanılamıyor.",
+    "decryptFailed": "Bu mesaj çözülemedi. Sohbeti yenileyin.",
+    "reportContextNotice": "Raporla birlikte bu mesaj ve öncesindeki {{count}} mesaj moderasyon ekibine iletilecek. Başka hiçbir mesajınız gönderilmez.",
+    "safetyNumber": "Güvenlik numarası",
+    "safetyNumberHint": "Karşınızdaki kişiyle bu numarayı karşılaştırarak sohbetin güvenli olduğunu doğrulayabilirsiniz.",
+    "sendFailed": "Mesaj gönderilemedi. Yazdığın metin duruyor — tekrar dene.",
+    "placeholder": "Bir mesaj yazın",
+    "send": "Gönder"
+  },
+  "market": {
+    "title": "Şablon Pazarı",
+    "loadFailed": "Şablonlar yüklenemedi.",
+    "use": "Uygula",
+    "proOnly": "PRO",
+    "creatorOnly": "Creator aboneleri",
+    "useCount": "{{count}} kez kullanıldı"
+  },
+  "creator": {
+    "productUnavailable": "Bu creator aboneliği şu anda kullanılamıyor.",
+    "subscribe": "Abone ol",
+    "subscribed": "Abonesiniz"
+  },
+  "activity": {
+    "title": "Aktiflik gizliliği",
+    "lastSeen": "Son görülme",
+    "onlineBadge": "Çevrimiçi rozeti",
+    "ghostMode": "Ghost Mode",
+    "ghostModeHint": "EVEN PRO'ya özel. Son görülme, çevrimiçi rozeti, yazıyor göstergesi ve okundu bilgisini gizler.",
+    "reciprocityNotice": "Aktifliğinizi gizlerseniz siz de başkalarının aktifliğini göremezsiniz. Bu kural EVEN PRO üyeleri için de geçerlidir.",
+    "audience": {
+      "everyone": "Herkes",
+      "mutuals": "Karşılıklı takipleşenler",
+      "nobody": "Kimse"
+    },
+    "dmTitle": "Kimler mesaj atabilir",
+    "dmAudience": {
+      "everyone": "Herkes",
+      "following": "Takip ettiklerim",
+      "mutuals": "Karşılıklı takipleşenler",
+      "nobody": "Kimse"
+    },
+    "allowRequests": "İstek kutusuna izin ver"
+  },
+  "onboarding": {
+    "title": "EVEN GIRL PRO",
+    "subtitle": "Sınırsız üretim, filigransız çıktı, tüm stüdyo araçları.",
+    "continueFree": "Satın almadan devam et",
+    "benefits": [
+      "Sınırsız AI üretimi ve dışa aktarım",
+      "Filigransız, tam çözünürlüklü çıktı",
+      "24 saatlik hikayeler ve şifreli mesajlaşma",
+      "Ghost Mode ve özel çelenk rozeti",
+      "Reklamsız, tamamen temiz deneyim"
+    ]
+  },
+  "generate": {
+    "title": "Even Girl Generate",
+    "conceptHint": "Konseptinizi 3-5 kelimeyle özetleyin",
+    "conceptPlaceholder": "örn. cyberpunk sokaklar, neon ışıklar",
+    "referenceHint": "5 referans fotoğraf yükleyin",
+    "generate": "Oluştur",
+    "error": {
+      "too-few-references": "5 referans fotoğraf gerekiyor.",
+      "too-many-references": "En fazla 5 referans fotoğraf yükleyebilirsiniz.",
+      "too-few-words": "Konsept en az 3 kelime olmalı.",
+      "too-many-words": "Konsept en fazla 5 kelime olmalı.",
+      "empty-concept": "Bir konsept yazın."
+    },
+    "opensDedicatedFlow": "Even Girl Generate kendi ekranında açılır."
+  },
+  "export": {
+    "freeRightUsed": "Ücretsiz indirme hakkınızı kullandınız.",
+    "freeRightRemaining": "{{count}} ücretsiz indirme hakkınız kaldı.",
+    "captureBlocked": "Ekran görüntüsü ve kayıt, PRO olmadan kullanılamaz.",
+    "upgradeToExport": "İndirmeye devam etmek için PRO'ya geçin.",
+    "saved": "Galerine kaydedildi.",
+    "capture": {
+      "recordingBlocked": "Ekran kaydı açık olduğu için önizleme gizlendi.",
+      "screenshotNotice": "Ücretsiz indirme hakkınızı kullandınız. Filigransız kaydetmek için abone olun.",
+      "gateTitle": "Önizleme gizlendi",
+      "gateBody": "Ücretsiz indirme hakkınız kullanıldı. EVEN GIRL Pro filigransız ve sınırsız kaydeder.",
+      "gateAction": "EVEN GIRL Pro’yu gör"
+    },
+    "save": "Galeriye kaydet",
+    "saving": "Kaydediliyor…",
+    "failed": "Kaydedilemedi. Projen olduğu gibi duruyor.",
+    "permissionDenied": "Galeriye ekleme izni verilmedi.",
+    "saveUnsupported": "Bu Android sürümünde galeriye kayıt yok. Paylaş seçeneğini kullan.",
+    "saverUnavailable": "Bu cihazda kaydetme kullanılamıyor."
+  },
+  "studio": {
+    "manualTitle": "Manuel & Botox Stüdyo",
+    "manualSubtitle": "Ücretsiz ve sınırsız. Zorunlu fırçalama yok — tam kontrol sizde.",
+    "region": {
+      "jawline": "Çene hattı",
+      "cheek": "Elmacık",
+      "nose": "Burun",
+      "eyes": "Gözler",
+      "lips": "Dudaklar",
+      "chin": "Çene",
+      "waist": "Bel",
+      "hips": "Kalça",
+      "legs": "Bacaklar",
+      "shoulders": "Omuzlar"
+    },
+    "botox": "Botox etkisi",
+    "smooth": "Cilt pürüzsüzleştirme",
+    "preservePores": "Gözenekleri koru",
+    "blemish": "Leke silgisi",
+    "modeManual": "Manuel",
+    "modeGenerate": "AI Generate"
+  },
+  "share": {
+    "title": "Paylaş",
+    "instagram": "Instagram Hikayeler",
+    "whatsapp": "WhatsApp Durumu",
+    "system": "Diğer uygulamalar",
+    "failed": "Paylaşım tamamlanamadı.",
+    "notInstalled": "Bu uygulama cihazınızda kurulu değil."
+  },
+  "reward": {
+    "push": {
+      "title": "Haftalık ödülünüz hazır",
+      "body": "{{rank}}. sırada bitirdiniz — {{days}} günlük ücretsiz PRO kodunuz hazır."
+    },
+    "pendingTitle": "Bekleyen ödülünüz var",
+    "pendingBody": "{{days}} günlük ücretsiz PRO kodunuzu mağaza üzerinden kullanabilirsiniz.",
+    "redeem": "Kodu kullan",
+    "redeemFailed": "Kod sayfası açılamadı. Lütfen tekrar deneyin.",
+    "expiresIn": "{{days}} gün içinde geçerliliğini yitirir",
+    "storeNote": "Kod, mağazanın kendi sayfasında kullanılır. Aboneliğiniz mağaza hesabınızda görünür ve istediğiniz zaman iptal edebilirsiniz.",
+    "available": "{{rank}}. sıra — {{days}} gün ücretsiz PRO"
+  },
+  "profile": {
+    "postCount": "{{count}} gönderi",
+    "empty": "Henüz gönderi paylaşılmamış."
+  },
+  "story": {
+    "expired": "Bu hikayenin süresi doldu.",
+    "remainingHours": "{{count}} sa kaldı",
+    "previous": "Önceki hikaye",
+    "next": "Sonraki hikaye"
+  },
+  "models": {
+    "meteredConfirmRequired": "Bu araç için bir kerelik indirme gerekiyor ve hücresel veri kullanılacak. Devam edilsin mi?"
+  }
+}
