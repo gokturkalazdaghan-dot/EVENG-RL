@@ -83,6 +83,12 @@ export function AppShell() {
   useEffect(() => {
     bootLocale();
     hydrate();
+    // Play'deki satın almayı HER AÇILIŞTA oku. localStorage silinebilir
+    // (yeniden kurulum, yeni telefon, veri temizleme) ama abonelik Play'de
+    // durur. Bu çağrı olmadan ödeyen kullanıcı PRO'sunu kaybeder ve haklı
+    // olarak iade ister. Play'in söylediği yereldekinden üstündür: iptal
+    // ya da iade durumunda yerel damgayı da düşürür.
+    useApp.getState().restorePro();
     setNavReady(true);
     ["/media/seer/coffee.jpg", "/media/seer/palm.jpg", "/media/seer/dream.jpg"].forEach((src) => {
       const img = new Image();

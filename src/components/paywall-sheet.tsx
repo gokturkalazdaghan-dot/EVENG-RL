@@ -30,19 +30,28 @@ export function PaywallSheet({ onClose }: Props) {
     if (isPro(useApp.getState().proUntil)) flushPendingDownload();
   }
 
+  /**
+   * GERÇEK satın alma akışı.
+   *
+   * Eskiden 900 ms sahte bekleme sonrası PRO açılıyordu — Play'e hiç
+   * gidilmiyordu. Artık `purchasePlaySku` BillingClient köprüsüne gidiyor
+   * ve `false` dönerse ekran "pick"e geri düşüyor; kullanıcı neden
+   * olmadığını flash mesajında görüyor. Sahte bekleme kaldırıldı: gerçek
+   * akışın kendi süresi var ve Play kendi ekranını açıyor.
+   */
   function buy() {
     if (phase !== "pick") return;
     setCrystalId("girl");
     setPhase("billing");
-    window.setTimeout(() => {
-      try {
-        purchasePlaySku(sku);
+    void (async () => {
+      const ok = await purchasePlaySku(sku);
+      if (ok) {
         setCrystalId("girl");
         setPhase("done");
-      } catch {
+      } else {
         setPhase("pick");
       }
-    }, 900);
+    })();
   }
 
   return (

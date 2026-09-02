@@ -29,6 +29,7 @@
 // bölerek parça parça denetime almak.
 // ─────────────────────────────────────────────────────────────────────────
 import { create } from "zustand";
+import { purchase as playPurchase, purchaseFailureText, restoreEntitlement } from "./billing";
 import {
   AGENTS,
   ATELIERS,
@@ -1554,10 +1555,24 @@ export const useApp = create<State>((set, get) => ({
     get().flash("Yedek indiriliyor.");
     return latest.image;
   },
+  /**
+   * 7 günlük ücretsiz PRO — YALNIZCA GELİŞTİRMEDE.
+   *
+   * `import.meta.env.DEV` bir derleme sabiti: üretim paketinde bu dalın
+   * TAMAMI ölü kod olarak silinir. Aksi halde herkesin tek dokunuşla
+   * bedava PRO açabildiği bir düğme yayına çıkardı — eski hali buydu.
+   *
+   * Gerçek bir kampanya isteniyorsa Play Console'daki promosyon kodları
+   * kullanılmalı; abonelik hakkı istemcide dağıtılmaz.
+   */
   redeemPro: () => {
+    if (!import.meta.env.DEV) {
+      get().flash("Ücretsiz deneme Google Play üzerinden sunulur.");
+      return;
+    }
     set({ proUntil: Date.now() + 6048e5 });
     get().persist();
-    get().flash("7 gün ücretsiz PRO açıldı.");
+    get().flash("Geliştirme kilidi: 7 gün PRO açıldı.");
   },
   sendFeedback: (kind, text) => {
     set({
@@ -1593,15 +1608,62 @@ export const useApp = create<State>((set, get) => ({
     set({ playPromptDismissed: true });
     get().persist();
   },
-  purchasePlaySku: (sku) => {
+  /**
+   * GERÇEK Google Play satın alması.
+   *
+   * ESKİ HALİ SAHTEYDİ: `proUntil`i doğrudan yazıp "Google Play üzerinden
+   * açıldı" diyordu. Play'e hiç gitmiyordu. Sonuç: kimse ödeyemiyor,
+   * herkes bedava PRO oluyordu. Olmamış bir satın almayı olmuş göstermek,
+   * bu fonksiyonun yapabileceği en zararlı şeydi.
+   *
+   * Artık `src/lib/billing.ts` üzerinden BillingClient köprüsüne gidiyor
+   * ve PRO yalnızca gerçek bir satın alma kaydından türetiliyor. Köprü
+   * yoksa (tarayıcı, eski kabuk) SESSİZCE AÇMAZ — sebebi söyler.
+   */
+  purchasePlaySku: async (sku) => {
     const plan = skuById(sku);
+    const result = await playPurchase(sku);
+    if (!result.ok) {
+      get().flash(purchaseFailureText(result.reason));
+      return false;
+    }
     set({
-      proUntil: Date.now() + plan.days * 24 * 3600_000,
+      proUntil: result.entitlement.untilMs,
       playInstalled: true,
       playPromptDismissed: true,
     });
     get().persist();
-    get().flash(`${plan.title} Google Play üzerinden açıldı.`);
+    get().flash(`${plan.title} etkin.`);
+    return true;
+  },
+
+  /**
+   * Açılışta Play'deki satın almaları okuyup PRO'yu geri yükler.
+   *
+   * BU OLMADAN: kullanıcı telefonunu değiştirir ya da uygulamayı yeniden
+   * kurar, localStorage gider, ödediği abonelik Play'de durur ama
+   * uygulamada PRO görünmez. Haklı olarak iade ister.
+   *
+   * Play'in söylediği, yerelde yazandan ÜSTÜNDÜR: abonelik iptal
+   * edildiğinde ya da iade alındığında yerel damga hâlâ ileri bir tarih
+   * gösterir. Köprü yoksa yerel değer korunur (tarayıcı önizlemesi).
+   */
+  restorePro: () => {
+    const ent = restoreEntitlement();
+    if (ent.source === "none" && !ent.pro) {
+      // Köprü yok ya da satın alma yok — köprü varsa PRO'yu düşür.
+      if (typeof window !== "undefined" && (window as { EvenBilling?: unknown }).EvenBilling) {
+        if (get().proUntil !== 0) {
+          set({ proUntil: 0 });
+          get().persist();
+        }
+      }
+      return;
+    }
+    if (get().proUntil !== ent.untilMs) {
+      set({ proUntil: ent.untilMs });
+      get().persist();
+    }
   },
   setCrystalId: (crystalId) => {
     set({ crystalId: crystalId === "boy" ? "girl" : crystalId });

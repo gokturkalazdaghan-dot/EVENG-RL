@@ -50,7 +50,7 @@ Removed on purpose (do not restore unless asked): Story, weekly rank/league, Fee
 5. **Bottom nav is `position: fixed; bottom: 0;`** with `padding-bottom: env(safe-area-inset-bottom)`. Content uses padding-bottom so it is not hidden. Do not put the nav in flex flow. Header uses `padding-top: env(safe-area-inset-top)`.
 6. **18+ checkbox only** (`legal-gate.tsx`). No year spinner.
 7. **Download is PRO-gated** (`src/lib/download.ts`). Screen capture is blocked (`capture-guard.tsx`) silently — do not tell the user recording is off.
-8. **Paywall** first launch if not PRO (`paywall-sheet.tsx`). SKUs: weekly $3.99, monthly $9.99, yearly $49.99. Crystals visual only — no “pink/blue” captions.
+8. **Paywall** first launch if not PRO (`paywall-sheet.tsx`). SKUs: weekly $3.99, monthly $9.99, yearly $49.99. Crystals visual only — no “pink/blue” captions. Purchases go through `src/lib/billing.ts` only; never write `proUntil` directly, and never grant PRO when the Play bridge is absent. `redeemPro` is a **dev-only** unlock behind `import.meta.env.DEV` — it is stripped from production builds (verified against the bundle).
 9. **Theme:** dim beige/white background, candy pink buttons, neon glow only on press/active. Not dark, not navy space. App language follows device; UI copy English-simple with TR catalog names OK.
 10. **Horizontal rails** for filters/templates (swipe left/right) so the photo stays on screen. Labels + color ribbons under thumbs must stay visible.
 11. **Agent dock** (right edge) opens a chooser under the app — does not auto-apply/save. Auto-hides to an edge chevron after ~20s idle.
@@ -115,7 +115,7 @@ android/                         WebView APK
    `eyeScaleWarp` / `almondWarp` were **measured, not assumed**: their radial `(1 - r²)²` falloff already reaches zero at the ellipse edge, so they never tore — worst neighbour jump 0.38 px at max strength. They keep their inline path on purpose; there is nothing to fix there.
 2. Hair style/cut is glaze/color, not a real restyle.
 3. Generate/video depends on API keys; always keep on-device fallback.
-4. Play Billing is UI-only (`play-store.ts`) — wire real Play Billing before store submit.
+4. ~~Play Billing is UI-only~~ — **web side done**, native side pending. It was worse than "UI-only": `purchasePlaySku` wrote `proUntil` straight to localStorage and told the user "Google Play üzerinden açıldı". No token, no BillingClient — nobody could pay and everybody got PRO free. Now routed through `src/lib/billing.ts`: entitlement is derived from real purchase records, PENDING never grants, unacknowledged purchases get acknowledged (Play refunds after 3 days otherwise), and `restorePro()` runs on every launch. Verified end to end: no bridge → no PRO; bridge present → PRO from the purchase record. **Remaining: `EvenBillingBridge.kt` in `android/` — see `docs/BILLING.md`.**
 5. WebView `www/index.html` can lag the Vite app — refresh it on each Android build.
 6. Some makeup brushes still feel faint; prefer visible-but-natural over no-op.
 
