@@ -366,6 +366,88 @@ function plain(text: string, max = 130): string {
   return t.trim().replace(/[,;:—-]$/, "");
 }
 
+/**
+ * Huyun okumadaki payı — HEDEF %30, SEZGİ DEĞİL HESAP.
+ *
+ * İki sezgisel deneme ölçüldü, ikisi de ıskaladı:
+ *   · her satıra huy eklemek        → %41,2 (rüyada %45'e kadar)
+ *   · "yarıdan uzunsa ekleme" eşiği → %17,3 (çoğu huy tamamen düşüyordu)
+ *
+ * Sebep aynı: külliyat satırlarının uzunluğu okuma türüne göre çok
+ * değişiyor (rüya kısa, kahve uzun), o yüzden sabit bir kural her türde
+ * farklı oran veriyor.
+ *
+ * Şimdi bütçe hesaplanıyor. Külliyatın toplam uzunluğu C ise, huy payının
+ * T/(C+T) = 0,30 olması için T = C × 0,30/0,70 ≈ 0,43·C olmalı. Huy
+ * cümleleri bu bütçe dolana kadar sırayla ekleniyor.
+ *
+ * SIRA ÖNEMLİ: `character` (kişinin özü) her zaman ilk sırada — bütçe
+ * ne kadar küçük olursa olsun hiçbir okuma kişiliksiz kalmasın diye.
+ * Sonra gönül, yol, kapanış.
+ */
+const TEMPER_SHARE = 0.3;
+
+export interface TemperPlan {
+  readonly character: string;
+  readonly love: string;
+  readonly path: string;
+  readonly near: string;
+}
+
+export function planTemper(
+  canonFields: readonly string[],
+  temper: Temperament,
+  share = TEMPER_SHARE,
+): TemperPlan {
+  const canonChars = canonFields.reduce((n, f) => n + String(f ?? "").length, 0);
+  let budget = canonChars * (share / (1 - share));
+
+  const take = (text: string): string => {
+    const t = String(text ?? "").trim();
+    if (t.length === 0) return "";
+    // Küçük taşmaya izin var (%35): tam sığmayan son cümleyi tamamen
+    // atmak ortalamayı hedefin belirgin altına düşürüyordu — ölçüldü,
+    // toleranssız hali %26,3 veriyor. Yarım cümle göstermek yerine ya
+    // tamamı alınıyor ya hiç.
+    if (t.length > budget * 1.35) return "";
+    budget -= t.length;
+    return t;
+  };
+
+  /*
+   * KARAKTERE BÜTÇE TAVANI.
+   *
+   * Ölçüldü: sıra `character` ile başlayınca kişinin özü bütçenin
+   * çoğunu yiyor ve okuma satırlarına pay kalmıyordu — el falında huy
+   * YALNIZCA BİR satıra dokunuyordu. Oran doğru çıkıyordu ama istenen
+   * bu değil: huy okumanın içine DAĞILMALI, ayrı bir paragrafa
+   * yığılmamalı.
+   *
+   * Karaktere bütçenin en fazla üçte biri; kalanı okuma satırlarına.
+   */
+  const characterBudget = budget / 3;
+  const full = budget;
+  budget = characterBudget;
+  const character = take(temper.core);
+  budget = full - (characterBudget - budget);
+
+  return {
+    character,
+    love: take(temper.heart),
+    path: take(temper.choice),
+    near: take(temper.strain),
+  };
+}
+
+/** Külliyat satırına planlanan huy cümlesini ekler. */
+function weave(canon: string, trait: string): string {
+  const base = String(canon ?? "").trim();
+  const add = String(trait ?? "").trim();
+  if (add.length === 0) return base;
+  if (base.length === 0) return add;
+  return `${endStop(base)} ${add}`;
+}
+
 /** Cümleyi noktalar; zaten noktalıysa dokunmaz. */
 function endStop(text: string): string {
   const t = String(text ?? "").trim();
@@ -398,12 +480,39 @@ function letter(
   };
   return {
     ...short,
-    // Huy varsa okumayı kişiye bağlayan kapanış; yoksa külliyat satırı
-    // olduğu gibi kalır.
-    // İki cümle arasına nokta: birleştirme "…açılmış kapı Zorlanınca…"
-    // gibi tek nefeslik bir yığın üretiyordu.
-    near: temper ? `${endStop(short.near)} ${temper.strain}` : short.near,
-    character: temper ? `${temper.core} ${temper.heart}` : undefined,
+    /*
+     * HUY TEK BLOKTA TOPLANMAZ, OKUMANIN İÇİNE DAĞILIR.
+     *
+     * Önceki halinde kişilik yalnızca `character` bölümündeydi ve okuma
+     * ikiye bölünüyordu: önce külliyat, sonra ayrı bir "sen böylesin"
+     * paragrafı. Falcı böyle konuşmaz — kişiyi anlatırken fincanı da
+     * anlatır, ikisi tek nefestir.
+     *
+     * Dağılım alanlara göre:
+     *   omen  · seen        yalnızca külliyat (kanca ve ölçüm bozulmasın)
+     *   love                gönül satırı  + huyun gönüldeki hali
+     *   path                yol satırı    + huyun karar verirkenki hali
+     *   near                kapanış       + huyun zorlandığındaki hali
+     *   character           kişinin özü, tek cümle
+     *
+     * Pay ölçülüyor, iddia edilmiyor: `natal.test.ts` içinde huylu ve
+     * huysuz okuma karşılaştırılıp huyun katkı oranı hesaplanıyor ve
+     * %30 bandında olması şart koşuluyor.
+     */
+    ...(temper
+      ? (() => {
+          const plan = planTemper(
+            [short.title, short.omen, short.seen, short.love, short.path, short.near],
+            temper,
+          );
+          return {
+            love: weave(short.love, plan.love),
+            path: weave(short.path, plan.path),
+            near: weave(short.near, plan.near),
+            character: plan.character || undefined,
+          };
+        })()
+      : {}),
     body: "",
     counsel: "",
     canon: "",

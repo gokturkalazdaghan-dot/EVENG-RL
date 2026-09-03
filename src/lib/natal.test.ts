@@ -284,5 +284,85 @@ test("doğum tarihi girilmemişse huy bölümü HİÇ çıkmaz", () => {
 test("doğum tarihi girilmişse huy bölümü gelir", () => {
   const l = dreamReading("Rüyamda evde bir yılan gördüm.", temperamentFor(7, 4));
   assert.ok(l);
-  assert.ok((l!.character ?? "").length > 20, l!.character);
+  // Eşik 20'den 8'e indi: huy cümleleri KASITLI olarak kısaldı. Uzun
+  // cümleler bütçeyi yiyip okumanın diğer satırlarına pay bırakmıyordu
+  // ve huy tek yere yığılıyordu — istenen dağılımın tersi.
+  assert.ok((l!.character ?? "").length >= 8, l!.character);
+  assert.ok(!/\s{2}|^\s|\s$/.test(l!.character ?? ""), "boşluk sorunu");
+});
+
+// ─── HUYUN PAYI ───────────────────────────────────────────────────────
+
+/**
+ * Ürün kararı: okuma AĞIRLIKLA kadim külliyattan gelsin, huy yaklaşık
+ * %30 pay alsın. Bu oran iddia değil ÖLÇÜM — huylu ve huysuz okumanın
+ * uzunluk farkı, huyun katkısının ta kendisi.
+ *
+ * İki sezgisel deneme ıskaladı ve ikisi de burada yakalandı:
+ *   her satıra huy eklemek        → %41,2
+ *   "yarıdan uzunsa ekleme" eşiği → %17,3
+ * Sebep: külliyat satırlarının uzunluğu okuma türüne göre çok değişiyor
+ * (rüya kısa, kahve uzun), sabit kural her türde farklı oran veriyor.
+ * Şimdi bütçe hesaplanıyor: T = C × 0,30/0,70.
+ */
+function shownText(l: OracleLetter): string {
+  return [l.title, l.omen, l.seen, l.love, l.path, l.near, l.character ?? ""].join(" ");
+}
+
+const FEAT = (over: Record<string, number> = {}) => ({
+  coverage: 0.15, centroidX: 0.5, centroidY: 0.5, blobArea: 0.12,
+  blobAspect: 1, blobX: 0.5, blobY: 0.5, scatter: 0.5, gap: 0.1, ...over,
+});
+
+const READINGS: [string, (t: ReturnType<typeof temperamentFor>) => OracleLetter | null][] = [
+  ["kahve", (t) => coffeeReading([FEAT({ blobAspect: 3.5 }), FEAT({ blobArea: 0.3, scatter: 0.3 }), FEAT()], t)],
+  ["el", (t) => palmReading({ heart: 0.8, head: 0.3, life: 0.6, continuity: 0.2, density: 0.5 }, t)],
+  ["rüya", (t) => dreamReading("Rüyamda evimizde bir yılan gördüm, kapı kilitliydi, dişim döküldü.", t)],
+];
+
+test("huyun payı %30 bandında — her okuma türü, her mizaç", () => {
+  const all: number[] = [];
+  for (const [name, make] of READINGS) {
+    const bare = shownText(make(null)!).length;
+    for (let m = 1; m <= 12; m++) {
+      const withTemper = shownText(make(temperamentFor(m, 15))!).length;
+      const share = (withTemper - bare) / withTemper;
+      all.push(share);
+      assert.ok(
+        share >= 0.18 && share <= 0.38,
+        `${name} · ay ${m}: huy payı %${(share * 100).toFixed(1)} — %30 bandının dışında`,
+      );
+    }
+  }
+  const mean = all.reduce((a, b) => a + b, 0) / all.length;
+  assert.ok(
+    mean >= 0.26 && mean <= 0.34,
+    `ortalama %${(mean * 100).toFixed(1)} — hedef %30`,
+  );
+  assert.equal(all.length, 36);
+});
+
+/**
+ * HUY TEK BLOKTA TOPLANMAMALI, DAĞILMALI. Payın doğru olması yetmez:
+ * hepsi `character` alanında olsaydı oran yine %30 çıkardı ama okuma
+ * ikiye bölünürdü — önce külliyat, sonra ayrı bir "sen böylesin"
+ * paragrafı. Falcı böyle konuşmaz.
+ */
+test("huy okumanın İÇİNE dağılır, tek bölüme yığılmaz", () => {
+  for (const [name, make] of READINGS) {
+    const bare = make(null)!;
+    const withT = make(temperamentFor(7, 4))!;
+    const touched = (["love", "path", "near"] as const).filter(
+      (k) => (withT[k] ?? "") !== (bare[k] ?? ""),
+    );
+    assert.ok(touched.length >= 2, `${name}: huy yalnızca ${touched.length} satıra dokundu`);
+    assert.ok((withT.character ?? "").length > 10, `${name}: karakter satırı boş`);
+  }
+});
+
+test("doğum tarihi yoksa okuma tamamen külliyattan gelir", () => {
+  for (const [name, make] of READINGS) {
+    const l = make(null)!;
+    assert.equal(l.character, undefined, name);
+  }
 });

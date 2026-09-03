@@ -3468,3 +3468,41 @@ html.is-kb .app-nav {
     scroll-behavior: auto !important;
   }
 }
+
+/* ─── GİRİŞ KAPISI: DOĞUM TARİHİ ─────────────────────────────────────
+   Kullanıcı burcunu yazmıyor, yalnızca tarihi giriyor; gerisini
+   algoritma çıkarıyor. Alan isteğe bağlı, bu yüzden görsel olarak
+   birincil eylemin (girişe devam) ÖNÜNE geçmiyor. */
+.legal-birth {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 100%;
+  margin: 0.25rem 0 0.75rem;
+  text-align: start;
+}
+.legal-birth-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--ink-soft, #7a5c6b);
+}
+.legal-birth-input {
+  appearance: none;
+  width: 100%;
+  /* 44px: dokunma hedefi alt sınırı (WCAG 2.2 · 2.5.8). */
+  min-height: 44px;
+  padding: 0 14px;
+  border: 1px solid var(--line, #efe2e7);
+  border-radius: 14px;
+  background: #fff;
+  color: var(--ink, #3a2430);
+  font: inherit;
+  font-size: 0.95rem;
+}
+.legal-birth-hint {
+  font-size: 0.68rem;
+  line-height: 1.4;
+  color: var(--ink-faint, #a99099);
+}

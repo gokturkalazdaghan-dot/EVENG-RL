@@ -6,6 +6,8 @@ import { createPortal } from "react-dom";
 export function LegalGate() {
   const open = useApp((s) => s.legalOpen);
   const acceptLegal = useApp((s) => s.acceptLegal);
+  const birthDate = useApp((s) => s.birthDate);
+  const setBirthDate = useApp((s) => s.setBirthDate);
   const lock = useRef(false);
   const tap = useFastTap(() => {
     if (lock.current) return;
@@ -40,6 +42,35 @@ export function LegalGate() {
         <p className="legal-note">
           18 yaşından büyüğüm. Fotoğraflar cihazımda kalır. Kimlik / reklam toplanmaz.
         </p>
+
+        {/*
+          DOĞUM TARİHİ GİRİŞTE SORULUYOR.
+
+          Kullanıcı burcunu YAZMIYOR ve seçmiyor; yalnızca tarihi giriyor.
+          Gerisini algoritma kendisi çıkarıyor (bkz. src/lib/natal.ts) ve
+          kişilik okumaları fal, el falı ve rüya yorumlarının İÇİNE
+          dağıtılıyor.
+
+          KİMLİK BİLGİSİ DEĞİL: ad, e-posta, telefon istenmiyor. Tarih bu
+          telefonda kalıyor, hiçbir yere gönderilmiyor. Boş bırakılabilir
+          ve giriş yine açılır — o zaman okumalar yalnızca kadim
+          külliyattan gelir.
+        */}
+        <label className="legal-birth">
+          <span className="legal-birth-label">Doğum tarihin</span>
+          <input
+            type="date"
+            className="legal-birth-input"
+            value={birthDate}
+            max={new Date().toISOString().slice(0, 10)}
+            min="1900-01-01"
+            onChange={(e) => setBirthDate(e.target.value)}
+          />
+          <span className="legal-birth-hint">
+            İsteğe bağlı. Yorumları sana göre ayarlamak için. Bu telefonda kalır.
+          </span>
+        </label>
+
         <button type="button" className="legal-go on" {...tap}>
           18+ kabul et, stüdyoya gir
         </button>
